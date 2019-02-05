@@ -8,7 +8,7 @@ public class Z_cellule extends Cellule {
   }
 
   public void affiche(){
-    System.out.print("[Zz]");
+    System.out.print("[zz]");
   }
 
   //

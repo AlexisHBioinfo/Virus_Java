@@ -7,7 +7,7 @@ public class Y_cellule extends Cellule {
     super(case_X,case_Y,3);
   }
   public void affiche(){
-    System.out.print("[Yy]");
+    System.out.print("[yy]");
   }
 
   //

@@ -7,7 +7,7 @@ public class X_cellule extends Cellule {
     super(case_X,case_Y,1000); //cellule immunisée donc vie "infinie"
   }
   public void affiche(){
-    System.out.print("[Xx]");
+    System.out.print("[xx]");
   }
 
   //

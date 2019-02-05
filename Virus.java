@@ -11,7 +11,7 @@ public class Virus extends Organisme {
   }
 
   public void affiche(){
-    System.out.print("[¤¤]");
+    System.out.print("[##]");
   }
 
   //
