@@ -11,7 +11,7 @@ public class Case {
   public void affiche(){
     System.out.print("[  ]");
   }
-  public boolean Menu_deplacements(){
+  public boolean Menu_deplacements(Case[][] grille){
     System.out.println("Case invalide");
     return false;
   }
@@ -29,6 +29,11 @@ public class Case {
 
   public int get_X(){
     return case_X;
+  }
+
+  public void test(int a,int b){
+    case_Y=a;
+    case_X=b;
   }
 
   public int get_Y(){

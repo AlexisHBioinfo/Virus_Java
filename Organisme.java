@@ -18,7 +18,7 @@ abstract public class Organisme extends Case{
   // public static boolean Menu_deplacements(){
   //   return false;
   // }
-  public boolean Menu_deplacements(){
+  public boolean Menu_deplacements(Case[][] grille){
       System.out.println("Case invalide orga");
       return false;
     }

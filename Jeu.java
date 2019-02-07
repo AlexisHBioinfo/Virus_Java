@@ -63,10 +63,12 @@ public class Jeu {
       int want_X = saisie_entier();
       int want_Y = saisie_entier();
       if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
-        valide=grille[want_Y][want_X].Menu_deplacements();
+        grille[want_Y][want_X].affiche();
+        valide=grille[want_Y][want_X].Menu_deplacements(grille);
         if (valide){
           mv_virus++;
           grille=association_vecteur_grille(contenuGrille,grille);
+          grille[want_Y][want_X].affiche();
           affichage_grille(grille);
         }
       }

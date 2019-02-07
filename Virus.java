@@ -24,7 +24,7 @@ public class Virus extends Organisme {
   //   return false;
   // }
 
-  public boolean Menu_deplacements(){
+  public boolean Menu_deplacements(Case[][] grille){
     System.out.println("T'es un virus caca ");
     // System.out.println(case_X+"    "+case_Y);
     boolean valide2=false;
@@ -37,10 +37,10 @@ public class Virus extends Organisme {
       System.out.println("4. Gauche");
       int choix = saisie_entier();
       switch (choix){
-        case 8 : valide2=set_Y(-1);System.out.println("En haut");break;
-        case 2 : valide2=set_Y(1);System.out.println("En bas");break;
-        case 6 : valide2=set_X(1);System.out.println("A droite");break;
-        case 4 : valide2=set_X(-1);System.out.println("A gauche");break;
+        case 8 : grille[case_Y-1][case_X].test(case_Y,case_X);valide2=set_Y(-1);System.out.println("En haut");break;
+        case 2 : grille[case_Y+1][case_X].test(case_Y,case_X);valide2=set_Y(1);System.out.println("En bas");break;
+        case 6 : grille[case_Y][case_X+1].test(case_Y,case_X);valide2=set_X(1);System.out.println("A droite");break;
+        case 4 : grille[case_Y][case_X-1].test(case_Y,case_X);valide2=set_X(-1);System.out.println("A gauche");break;
         default : System.out.println("Erreur de saisie !");
       }
     }
