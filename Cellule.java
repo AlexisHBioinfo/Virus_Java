@@ -9,4 +9,9 @@ abstract public class Cellule extends Organisme {
     numero = cpt;
     cpt++;
   }
+
+
+  public int test(int a,int b){
+    return 0;
+  }
 }

@@ -31,9 +31,10 @@ public class Case {
     return case_X;
   }
 
-  public void test(int a,int b){
+  public int test(int a,int b){
     case_Y=a;
     case_X=b;
+    return 0;
   }
 
   public int get_Y(){

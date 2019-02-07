@@ -10,6 +10,12 @@ public class X_cellule extends Cellule {
     System.out.print("[xx]");
   }
 
+  public int test(int a,int b){
+    System.out.println("Victime bolosse !");
+    return 3;
+    //Pas oublier enlever un pv au virus
+  }
+
   //
   // public static int fusion(){
   //   return 2;

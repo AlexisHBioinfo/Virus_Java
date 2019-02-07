@@ -10,6 +10,14 @@ public class Y_cellule extends Cellule {
     System.out.print("[yy]");
   }
 
+
+  public int test(int a,int b){
+    System.out.println("Vous avez contaminé une cellule sensible. Elle est triste.");
+    return 2;
+  }
+
+
+
   //
   // public static int fusion(){
   //   return 2;

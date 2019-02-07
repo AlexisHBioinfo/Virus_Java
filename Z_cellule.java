@@ -11,6 +11,12 @@ public class Z_cellule extends Cellule {
     System.out.print("[zz]");
   }
 
+  public int test(int a,int b){
+    System.out.println("Cellule Z killed !");
+    // statut="mort";
+    return 1;
+  }
+
   //
   // public static int fusion(){
   //   return 2;

@@ -22,22 +22,58 @@ abstract public class Organisme extends Case{
       System.out.println("Case invalide orga");
       return false;
     }
-  public boolean set_X(int x){
-    int tmp=case_X+x;
-    if ((tmp<20) || (tmp>=0)){
-      case_X+=x;
-      return true;
-    }
-    return false;
+
+  public int test(int a,int b){
+    return 0;
   }
 
-  public boolean set_Y(int y){
-    int tmp=case_Y+y;
-    if ((tmp<20) || (tmp>=0)){
-      case_Y+=y;
-      return true;
+
+
+  public void set_X(int a,int check, Case [][] grille){
+    switch (check){
+      case 0 : //case vide
+        case_X+=a;
+        break;
+      case 1 : //Z
+        case_X+=a;
+        point_de_vie+=1;
+        break;
+      case 2 : // Y
+        // Infectee grille[case_Y][case_X+a] = new Infectee(case_X,case_Y);
+        point_de_vie+=1;
+        break;
+      case 3 : // X
+        point_de_vie-=1;
+        break;
+      case 4 : // V
+        break;
+      default :
+        System.out.println("FATAL ERROR");
+        break;
     }
-    return false;
   }
 
+  public void set_Y(int b, int check, Case [][] grille){
+    switch (check){
+      case 0 : //case vide
+        case_Y+=b;
+        break;
+      case 1 : //Z
+        case_Y+=b;
+        point_de_vie+=1;
+        break;
+      case 2 : // Y
+        // Infectee grille[case_Y][case_X+a] = new Infectee(case_X,case_Y);
+        point_de_vie+=1;
+        break;
+      case 3 : // X
+        point_de_vie-=1;
+        break;
+      case 4 : // V
+        break;
+      default :
+        System.out.println("FATAL ERROR");
+        break;
+    }
+  }
 }

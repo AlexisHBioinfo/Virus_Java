@@ -15,6 +15,11 @@ public class Virus extends Organisme {
     System.out.print("[##]");
   }
 
+
+  public int test(int a, int b){
+    return 4;
+  }
+
   // public boolean set_X(int x){
   //   int tmp=case_X+x;
   //   if ((tmp<20) || (tmp>=0)){
@@ -36,15 +41,38 @@ public class Virus extends Organisme {
       System.out.println("6. Droite");
       System.out.println("4. Gauche");
       int choix = saisie_entier();
-      switch (choix){
-        case 8 : grille[case_Y-1][case_X].test(case_Y,case_X);valide2=set_Y(-1);System.out.println("En haut");break;
-        case 2 : grille[case_Y+1][case_X].test(case_Y,case_X);valide2=set_Y(1);System.out.println("En bas");break;
-        case 6 : grille[case_Y][case_X+1].test(case_Y,case_X);valide2=set_X(1);System.out.println("A droite");break;
-        case 4 : grille[case_Y][case_X-1].test(case_Y,case_X);valide2=set_X(-1);System.out.println("A gauche");break;
-        default : System.out.println("Erreur de saisie !");
+      int check;
+      if (((case_Y-1>=0) || (choix!=8)) && ((case_Y+1<20) || (choix!=2)) && ((case_X-1>=0) || (choix!=4)) && ((case_X+1<20) || (choix!=6))){
+        switch (choix){
+          case 8 :
+              check=grille[case_Y-1][case_X].test(case_Y,case_X);
+              set_Y(-1,check,grille);
+              System.out.println("En haut");
+              break;
+          case 2 :
+              check=grille[case_Y+1][case_X].test(case_Y,case_X);
+              set_Y(1,check,grille);
+              System.out.println("En bas");
+              break;
+          case 6 :
+              check=grille[case_Y][case_X+1].test(case_Y,case_X);
+              set_X(1,check,grille);
+              System.out.println("A droite");
+              break;
+          case 4 :
+              check=grille[case_Y][case_X-1].test(case_Y,case_X);
+              set_X(-1,check,grille);
+              System.out.println("A gauche");
+              break;
+          default : System.out.println("Erreur de saisie !");break;
+        }
+        valide2=true;
+      }
+      else {
+        System.out.println("Mouvement hors Elsa SUPER relou");
       }
     }
-    System.out.println(case_X+"    "+case_Y);
+    // System.out.println(case_X+"    "+case_Y);
     return true;
   }
   //
