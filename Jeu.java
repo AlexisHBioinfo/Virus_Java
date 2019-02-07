@@ -12,17 +12,18 @@ import java.util.Arrays;
 //Revoir enchainement des menus : while au mauvais endroit ?
 public class Jeu {
   public static void main(String[] arg){
+    Vector <Case> contenuGrille = new Vector <> ();
     Case[][] grille = creation_grille();
-    Menu(grille);
+    Menu(grille,contenuGrille);
   }
-  public static void Menu(Case[][] grille){
+  public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
     boolean run = true;
       System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
       System.out.println("1. Sélection du niveau.");
       System.out.println("2. Lecture des règles.");
       int choix = saisie_entier();
       switch (choix){
-        case 1 : Menu_niveaux(grille);
+        case 1 : Menu_niveaux(grille,contenuGrille);
                   break;
         case 2 : Regles();
                   break;
@@ -30,7 +31,7 @@ public class Jeu {
                   break;
       }
     }
-  public static void Menu_niveaux(Case[][] grille){
+  public static void Menu_niveaux(Case[][] grille,Vector <Case> contenuGrille){
     boolean run = true;
     System.out.println("~~~~~~~~~~~ Quel niveau voulez-vous tenter ?~~~~~~~~~~~");
     System.out.println("1. Facile");
@@ -38,34 +39,34 @@ public class Jeu {
     System.out.println("3. Difficile");
     int choix = saisie_entier();
     switch (choix){
-      case 1 : grille = repartition_organismes(grille,15,30,55);
+      case 1 : grille = repartition_organismes(grille,15,30,55,contenuGrille);
                 break;
-      case 2 : grille = repartition_organismes(grille,20,40,40);
+      case 2 : grille = repartition_organismes(grille,20,40,40,contenuGrille);
                 break;
-      case 3 : grille = repartition_organismes(grille,25,50,25);
+      case 3 : grille = repartition_organismes(grille,25,50,25,contenuGrille);
                 break;
       default : System.out.println("Choix non valide");
                 break;
     }
     System.out.println("CPT : "+Cellule.cpt+Virus.cpt);
-    Menu_Virus(grille);
+    Menu_Virus(grille,contenuGrille);
   }
-  public static void Menu_Virus(Case[][] grille){
+  public static void Menu_Virus(Case[][] grille,Vector <Case> contenuGrille){
     boolean run = true;
     int mv_virus=0;
     boolean valide;
     while ((run) && (Virus.cpt!=mv_virus)) {
       System.out.println("~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~");
       System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
-      System.out.println("Rentrez le numéro de la ligne voulue faites ENTRER puis rentrez les numéro de la colonne.");
+      System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
       System.out.println("Tapez '666' pour finir votre tour.");
-      int ligne = saisie_entier();
-      int colonne = saisie_entier();
-      if (colonne < 20 && ligne < 20 && colonne >= 0 && ligne > 0){
-        System.out.println("lollllll");
-        valide=grille[colonne][ligne].Menu_deplacements();
+      int want_X = saisie_entier();
+      int want_Y = saisie_entier();
+      if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
+        valide=grille[want_Y][want_X].Menu_deplacements();
         if (valide){
           mv_virus++;
+          grille=association_vecteur_grille(contenuGrille,grille);
           affichage_grille(grille);
         }
       }
@@ -103,7 +104,7 @@ public class Jeu {
     }
     return grille;
   }
-  public static Case[][] repartition_organismes(Case[][] grille, int nbX, int nbY, int nbZ){
+  public static Case[][] repartition_organismes(Case[][] grille, int nbX, int nbY, int nbZ,Vector <Case> contenuGrille){
     int nbV = 10;
     Vector <Integer> indexgrille = new Vector<>();
     for (int a = 0; a<400 ; a++){
@@ -113,17 +114,18 @@ public class Jeu {
     int nbcasesX = nbcases - nbX;
     int nbcasesY = nbcasesX - nbY;
     int nbcasesZ = nbcasesY - nbZ;
-    grille = repartition(grille, indexgrille, nbX,1, nbcases);
-    // for (int i=0; i<nbcasesX;i++){
-    //   System.out.println(indexgrille.get(i));
-    // }
-    grille = repartition(grille, indexgrille, nbY,2, nbcasesX);
-    grille = repartition(grille, indexgrille, nbZ,3, nbcasesY);
-    grille = repartition(grille, indexgrille, 10,4,nbcasesZ);
+    contenuGrille = repartition(indexgrille, nbX,1, nbcases,contenuGrille);
+    contenuGrille = repartition(indexgrille, nbY,2, nbcasesX,contenuGrille);
+    contenuGrille = repartition(indexgrille, nbZ,3, nbcasesY,contenuGrille);
+    contenuGrille = repartition(indexgrille, 10,4,nbcasesZ,contenuGrille);
+    contenuGrille = repartition(indexgrille, 290, 5, 290,contenuGrille);
+    grille=association_vecteur_grille(contenuGrille,grille);
+    System.out.println(contenuGrille.get(22));
+    System.out.println(contenuGrille.get(399));
     affichage_grille(grille);
     return grille;
   }
-  public static Case[][] repartition(Case[][] grille, Vector <Integer> indexgrille, int nbOrganisme, int quelOrganisme, int nbcases){
+  public static Vector <Case> repartition(Vector <Integer> indexgrille, int nbOrganisme, int quelOrganisme, int nbcases, Vector <Case> contenuGrille){
     for (int i = 0; i < nbOrganisme ; i++) {
       Random rand = new Random();
       int indice = rand.nextInt(nbcases-i);
@@ -132,17 +134,43 @@ public class Jeu {
       // System.out.print("\n\n\n"+indice+"\n\n\n");
       int pos_X = index_pos%20;
       int pos_Y = index_pos/20;
-      System.out.println("avant"+pos_X+"  "+pos_Y);
+      // System.out.println("avant"+pos_X+"  "+pos_Y);
+      Case item;
       switch (quelOrganisme){
-        case 1 : grille[pos_X][pos_Y] = new X_cellule(pos_X,pos_Y);System.out.println(pos_X+"  "+pos_Y+grille[pos_X][pos_Y].);break;
-        case 2 : grille[pos_X][pos_Y] = new Y_cellule(pos_X,pos_Y);break;
-        case 3 : grille[pos_X][pos_Y] = new Z_cellule(pos_X,pos_Y);break;
-        case 4 : grille[pos_X][pos_Y] = new Virus(pos_X,pos_Y);break;
+        case 1 : item = new X_cellule(pos_X,pos_Y);contenuGrille.add(item);break;
+        case 2 : item = new Y_cellule(pos_X,pos_Y);contenuGrille.add(item);break;
+        case 3 : item = new Z_cellule(pos_X,pos_Y);contenuGrille.add(item);break;
+        case 4 : item = new Virus(pos_X,pos_Y);contenuGrille.add(item);break;
+        case 5 : item = new Case(pos_X,pos_Y);contenuGrille.add(item);break;
         default : System.out.println("Création d'organisme invalide");break;
       }
     }
+    return contenuGrille;
+  }
+
+  public static Case [][] association_vecteur_grille(Vector <Case> contenuGrille,Case [][] grille){
+    grille=creation_grille();
+    int x;
+    int y;
+    for (int i=0;i<contenuGrille.size();i++){
+      Case item = contenuGrille.get(i);
+      item.affiche();
+      System.out.println(item.get_X());
+      x = item.get_X();
+      y = item.get_Y();
+      grille[y][x]=item;
+      // System.out.println(grille[x][y].get_X()+" "+x);
+    }
+    // for (int j=0;j<grille.length;j++){
+    //   for (int h=0;h<grille[j].length;h++){
+    //     System.out.print(grille[j][h].get_X());
+    //   }
+    //   System.out.println("");
+    // }
     return grille;
   }
+
+
   public static void affichage_grille(Case[][] grille){
     try {
       for (int horizontal = 0 ; horizontal < 20 ; horizontal++){

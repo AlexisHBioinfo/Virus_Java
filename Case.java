@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class Case {
-  protected static int case_X;
-  protected static int case_Y;
+  protected int case_X;
+  protected int case_Y;
   public Case(int X, int Y){
     case_X = X;
     case_Y = Y;
@@ -26,4 +26,13 @@ public class Case {
       return 0;
     }
   }
+
+  public int get_X(){
+    return case_X;
+  }
+
+  public int get_Y(){
+    return case_Y;
+  }
+
 }

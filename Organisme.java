@@ -22,7 +22,7 @@ abstract public class Organisme extends Case{
       System.out.println("Case invalide orga");
       return false;
     }
-  public static boolean set_X(int x){
+  public boolean set_X(int x){
     int tmp=case_X+x;
     if ((tmp<20) || (tmp>=0)){
       case_X+=x;
@@ -31,7 +31,7 @@ abstract public class Organisme extends Case{
     return false;
   }
 
-  public static boolean set_Y(int y){
+  public boolean set_Y(int y){
     int tmp=case_Y+y;
     if ((tmp<20) || (tmp>=0)){
       case_Y+=y;
