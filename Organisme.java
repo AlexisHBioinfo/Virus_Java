@@ -76,4 +76,10 @@ abstract public class Organisme extends Case{
         break;
     }
   }
+
+  public Infectee get_infectee(){
+    return null;
+  }
+
+  public void maj_compteurs(){}
 }

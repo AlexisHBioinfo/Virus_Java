@@ -14,4 +14,12 @@ abstract public class Cellule extends Organisme {
   public int test(int a,int b){
     return 0;
   }
+
+
+  public Infectee get_infectee(){
+    return null;
+  }
+
+  public void maj_compteurs(){}
+
 }

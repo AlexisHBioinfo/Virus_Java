@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Case {
+  protected boolean statut = true;
   protected int case_X;
   protected int case_Y;
   public Case(int X, int Y){
@@ -40,5 +41,24 @@ public class Case {
   public int get_Y(){
     return case_Y;
   }
+
+  public boolean get_statut(){
+    return statut;
+  }
+
+
+  public void set_statut(){
+    if (statut){
+      statut=false;
+    }
+    else {
+      statut=true;
+    }
+  }
+
+  public void maj_compteurs(){}
+
+  public Infectee get_infectee(){return null;}
+
 
 }

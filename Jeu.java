@@ -49,27 +49,44 @@ public class Jeu {
                 break;
     }
     System.out.println("CPT : "+Cellule.cpt+Virus.cpt);
-    Menu_Virus(grille,contenuGrille);
+    boolean tour = true;
+    int cpt_tour = 0;
+    while (tour){
+      Menu_Virus(grille,contenuGrille);
+      // Menu_Cellule(grille,contenuGrille);
+      for (int i=0;i<contenuGrille.size();i++){
+        Case item = contenuGrille.get(i);
+        item.maj_compteurs();
+      }
+      cpt_tour++;
+      System.out.println("Fin du tour "+cpt_tour);
+    }
   }
   public static void Menu_Virus(Case[][] grille,Vector <Case> contenuGrille){
-    boolean run = true;
+    // boolean run = true;
     int mv_virus=0;
     boolean valide;
-    while ((run) && (Virus.cpt!=mv_virus)) {
+    int want_X = 0;
+    int want_Y = 0;
+    // int machin=0;
+    // while ((run) && (Virus.cpt!=mv_virus)){
+    while (((want_X !=666) || (want_Y != 666)) && (Virus.cpt!=mv_virus)) {
       System.out.println("~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~");
       System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
       System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
-      System.out.println("Tapez '666' pour finir votre tour.");
-      int want_X = saisie_entier();
-      int want_Y = saisie_entier();
-      if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
-        // grille[want_Y][want_X].affiche();
-        valide=grille[want_Y][want_X].Menu_deplacements(grille);
-        if (valide){
-          mv_virus++;
-          grille=association_vecteur_grille(contenuGrille,grille);
+      System.out.println("Tapez '666' deux fois pour finir votre tour.");
+      want_X = saisie_entier();
+      want_Y = saisie_entier();
+      if ((want_X != 666) && (want_Y != 666)){
+        if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
           // grille[want_Y][want_X].affiche();
-          affichage_grille(grille);
+          valide=grille[want_Y][want_X].Menu_deplacements(grille);
+          if (valide){
+            mv_virus++;
+            grille=association_vecteur_grille(contenuGrille,grille);
+            // grille[want_Y][want_X].affiche();
+            affichage_grille(grille);
+          }
         }
       }
     }
@@ -139,12 +156,31 @@ public class Jeu {
       // System.out.println("avant"+pos_X+"  "+pos_Y);
       Case item;
       switch (quelOrganisme){
-        case 1 : item = new X_cellule(pos_X,pos_Y);contenuGrille.add(item);break;
-        case 2 : item = new Y_cellule(pos_X,pos_Y);contenuGrille.add(item);break;
-        case 3 : item = new Z_cellule(pos_X,pos_Y);contenuGrille.add(item);break;
-        case 4 : item = new Virus(pos_X,pos_Y);contenuGrille.add(item);break;
-        case 5 : item = new Case(pos_X,pos_Y);contenuGrille.add(item);break;
-        default : System.out.println("Création d'organisme invalide");break;
+        case 1 :
+            item = new X_cellule(pos_X,pos_Y);
+            contenuGrille.add(item);
+            break;
+        case 2 :
+            item = new Y_cellule(pos_X,pos_Y);
+            Infectee item_infectee=item.get_infectee();
+            contenuGrille.add(item);
+            contenuGrille.add(item_infectee);
+            break;
+        case 3 :
+            item = new Z_cellule(pos_X,pos_Y);
+            contenuGrille.add(item);
+            break;
+        case 4 :
+            item = new Virus(pos_X,pos_Y);
+            contenuGrille.add(item);
+            break;
+        case 5 :
+            item = new Case(pos_X,pos_Y);
+            contenuGrille.add(item);
+            break;
+        default :
+            System.out.println("Création d'organisme invalide");
+            break;
       }
     }
     return contenuGrille;
@@ -157,10 +193,13 @@ public class Jeu {
     for (int i=0;i<contenuGrille.size();i++){
       Case item = contenuGrille.get(i);
       item.affiche();
-      System.out.println(item.get_X());
-      x = item.get_X();
-      y = item.get_Y();
-      grille[y][x]=item;
+      // System.out.println(item.get_statut());
+      System.out.println("X: "+item.get_X()+"Y: "+item.get_Y());
+      if (item.get_statut()){
+        x = item.get_X();
+        y = item.get_Y();
+        grille[y][x]=item;
+      }
       // System.out.println(grille[x][y].get_X()+" "+x);
     }
     // for (int j=0;j<grille.length;j++){

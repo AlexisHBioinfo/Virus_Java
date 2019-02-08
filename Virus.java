@@ -88,4 +88,5 @@ public class Virus extends Organisme {
   public static String infection(){
     return "Rien";
   }
+
 }
