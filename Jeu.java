@@ -16,21 +16,24 @@ public class Jeu {
     Case[][] grille = creation_grille();
     Menu(grille,contenuGrille);
   }
+
+
   public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
-    boolean run = true;
-      System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
-      System.out.println("1. Sélection du niveau.");
-      System.out.println("2. Lecture des règles.");
-      int choix = saisie_entier();
-      switch (choix){
-        case 1 : Menu_niveaux(grille,contenuGrille);
-                  break;
-        case 2 : Regles();
-                  break;
-        default : System.out.println("Choix non valide");
-                  break;
+    System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
+    System.out.println("1. Sélection du niveau.");
+    System.out.println("2. Lecture des règles.");
+    int choix = saisie_entier();
+    switch (choix){
+      case 1 : Menu_niveaux(grille,contenuGrille);
+                break;
+      case 2 : Regles();
+                break;
+      default : System.out.println("Choix non valide");
+                break;
       }
     }
+
+
   public static void Menu_niveaux(Case[][] grille,Vector <Case> contenuGrille){
     boolean run = true;
     System.out.println("~~~~~~~~~~~ Quel niveau voulez-vous tenter ?~~~~~~~~~~~");
@@ -52,7 +55,9 @@ public class Jeu {
     boolean tour = true;
     int cpt_tour = 0;
     while (tour){
-      Menu_Virus(grille,contenuGrille);
+      contenuGrille=Menu_Virus(grille,contenuGrille);
+      grille=association_vecteur_grille(contenuGrille,grille);
+      affichage_grille(grille);
       // Menu_Cellule(grille,contenuGrille);
       for (int i=0;i<contenuGrille.size();i++){
         Case item = contenuGrille.get(i);
@@ -62,7 +67,9 @@ public class Jeu {
       System.out.println("Fin du tour "+cpt_tour);
     }
   }
-  public static void Menu_Virus(Case[][] grille,Vector <Case> contenuGrille){
+
+
+  public static Vector <Case> Menu_Virus(Case[][] grille,Vector <Case> contenuGrille){
     // boolean run = true;
     int mv_virus=0;
     boolean valide;
@@ -90,27 +97,16 @@ public class Jeu {
         }
       }
     }
-    //Appelle du menu déplacement puis des déplacements
+    return contenuGrille;
   }
-  // public static void Menu_deplacements(){
-  //   while(run){
-  //     System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
-  //     System.out.println("-> Pour plus de confort, utiliser le pavé numérique.");
-  //     System.out.println("8. Haut");
-  //     System.out.println("2. Bas");
-  //     System.out.println("6. Droite");
-  //     System.out.println("4. Gauche");
-  //     int choix = saisie_entier();
-  //     switch (choix){
-  //       case 8 : set_X(-1);break;
-  //
-  //     }
-  //   }
-  // }
+
+
   public static void Regles(){
     System.out.println("~~~~~~~~~~~ Les règles ~~~~~~~~~~~");
     System.out.println(" A FAIRE ");
   }
+
+
   public static Case[][] creation_grille(){
     Case grille[][] = new Case[20][];
     for ( int i=0; i < grille.length ; i++){
@@ -123,6 +119,8 @@ public class Jeu {
     }
     return grille;
   }
+
+
   public static Case[][] repartition_organismes(Case[][] grille, int nbX, int nbY, int nbZ,Vector <Case> contenuGrille){
     int nbV = 10;
     Vector <Integer> indexgrille = new Vector<>();
@@ -144,6 +142,8 @@ public class Jeu {
     affichage_grille(grille);
     return grille;
   }
+
+
   public static Vector <Case> repartition(Vector <Integer> indexgrille, int nbOrganisme, int quelOrganisme, int nbcases, Vector <Case> contenuGrille){
     for (int i = 0; i < nbOrganisme ; i++) {
       Random rand = new Random();
@@ -185,6 +185,7 @@ public class Jeu {
     }
     return contenuGrille;
   }
+
 
   public static Case [][] association_vecteur_grille(Vector <Case> contenuGrille,Case [][] grille){
     grille=creation_grille();
@@ -233,6 +234,8 @@ public class Jeu {
       System.out.println("Création de la grille réussie.");
     }
   }
+
+
   public static int saisie_entier() {
     try {
       BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
