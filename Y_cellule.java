@@ -8,8 +8,9 @@ public class Y_cellule extends Cellule {
   Y_cellule(int case_X, int case_Y){
     super(case_X,case_Y,3);
     Y_infectee = new Infectee(case_X,case_Y);
-    // Y_infectee.affiche();
   }
+
+
   public void affiche(){
     System.out.print("[yy]");
   }
@@ -19,6 +20,7 @@ public class Y_cellule extends Cellule {
     System.out.println("Vous avez contaminé une cellule sensible. Elle est triste.");
     set_statut();
     Y_infectee.set_statut();
+    Y_infectee.set_position(case_X,case_Y);
     return 2;
   }
 
@@ -27,23 +29,17 @@ public class Y_cellule extends Cellule {
     return Y_infectee;
   }
 
+
   public void maj_compteurs(){
     if (!statut){
       cpt_guerison+=1;
+      case_X=Y_infectee.get_X();
+      case_Y=Y_infectee.get_Y();
       if (cpt_guerison>=3){
         set_statut();
         cpt_guerison=0;
       }
     }
+    super.maj_compteurs();
   }
-
-  //
-  // public static int fusion(){
-  //   return 2;
-  // }
-  //
-  //
-  // public static String infection(){
-  //   return "Infection";
-  // }
 }

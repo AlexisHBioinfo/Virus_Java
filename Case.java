@@ -58,6 +58,7 @@ public class Case {
 
   public void maj_compteurs(){}
 
+
   public Infectee get_infectee(){return null;}
 
 

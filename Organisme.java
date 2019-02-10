@@ -2,22 +2,13 @@ import java.io.*;
 import java.util.*;
 abstract public class Organisme extends Case{
   protected int point_de_vie;
+  protected boolean mouvement=true;
   public Organisme (int case_X, int case_Y, int hp){
     super(case_X,case_Y);
     point_de_vie=hp;
   }
 
-  //
-  // public void deplacement(){
-  //
-  // }
-  //
-  //
-  // public abstract void mourir();
-  //
-  // public static boolean Menu_deplacements(){
-  //   return false;
-  // }
+
   public boolean Menu_deplacements(Case[][] grille){
       System.out.println("Case invalide orga");
       return false;
@@ -26,7 +17,6 @@ abstract public class Organisme extends Case{
   public int test(int a,int b){
     return 0;
   }
-
 
 
   public void set_X(int a,int check, Case [][] grille){
@@ -39,7 +29,6 @@ abstract public class Organisme extends Case{
         point_de_vie+=1;
         break;
       case 2 : // Y
-        // Infectee grille[case_Y][case_X+a] = new Infectee(case_X,case_Y);
         point_de_vie+=1;
         break;
       case 3 : // X
@@ -52,6 +41,7 @@ abstract public class Organisme extends Case{
         break;
     }
   }
+
 
   public void set_Y(int b, int check, Case [][] grille){
     switch (check){
@@ -63,7 +53,6 @@ abstract public class Organisme extends Case{
         point_de_vie+=1;
         break;
       case 2 : // Y
-        // Infectee grille[case_Y][case_X+a] = new Infectee(case_X,case_Y);
         point_de_vie+=1;
         break;
       case 3 : // X
@@ -77,9 +66,18 @@ abstract public class Organisme extends Case{
     }
   }
 
+
   public Infectee get_infectee(){
     return null;
   }
 
-  public void maj_compteurs(){}
+
+  public void maj_compteurs(){
+    mouvement=true;
+  }
+
+
+
+
+
 }

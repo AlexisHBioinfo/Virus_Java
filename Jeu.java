@@ -75,8 +75,6 @@ public class Jeu {
     boolean valide;
     int want_X = 0;
     int want_Y = 0;
-    // int machin=0;
-    // while ((run) && (Virus.cpt!=mv_virus)){
     while (((want_X !=666) || (want_Y != 666)) && (Virus.cpt!=mv_virus)) {
       System.out.println("~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~");
       System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
@@ -86,12 +84,10 @@ public class Jeu {
       want_Y = saisie_entier();
       if ((want_X != 666) && (want_Y != 666)){
         if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
-          // grille[want_Y][want_X].affiche();
           valide=grille[want_Y][want_X].Menu_deplacements(grille);
           if (valide){
             mv_virus++;
             grille=association_vecteur_grille(contenuGrille,grille);
-            // grille[want_Y][want_X].affiche();
             affichage_grille(grille);
           }
         }
@@ -150,10 +146,8 @@ public class Jeu {
       int indice = rand.nextInt(nbcases-i);
       int index_pos = indexgrille.get(indice);
       indexgrille.remove(indice);
-      // System.out.print("\n\n\n"+indice+"\n\n\n");
       int pos_X = index_pos%20;
       int pos_Y = index_pos/20;
-      // System.out.println("avant"+pos_X+"  "+pos_Y);
       Case item;
       switch (quelOrganisme){
         case 1 :
@@ -201,14 +195,7 @@ public class Jeu {
         y = item.get_Y();
         grille[y][x]=item;
       }
-      // System.out.println(grille[x][y].get_X()+" "+x);
     }
-    // for (int j=0;j<grille.length;j++){
-    //   for (int h=0;h<grille[j].length;h++){
-    //     System.out.print(grille[j][h].get_X());
-    //   }
-    //   System.out.println("");
-    // }
     return grille;
   }
 

@@ -20,6 +20,10 @@ abstract public class Cellule extends Organisme {
     return null;
   }
 
-  public void maj_compteurs(){}
+
+  public void stop_mouvement(){
+    mouvement=false;
+  }
+
 
 }

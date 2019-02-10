@@ -16,15 +16,7 @@ public class X_cellule extends Cellule {
     //Pas oublier enlever un pv au virus
   }
 
-  //
-  // public static int fusion(){
-  //   return 2;
-  // }
-  //
-  //
-  // public static String infection(){
-  //   return "Infection";
-  // }
+
 
   public static String infection(){
     return "Rien";
