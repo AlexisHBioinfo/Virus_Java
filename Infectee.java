@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Infectee extends Virus {
   protected int cpt_infection=3;
-  protected Y_cellule y_cell;
   Infectee(int case_X, int case_Y){
     super(case_X,case_Y);
     statut=false;

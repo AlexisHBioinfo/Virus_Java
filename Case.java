@@ -28,9 +28,6 @@ public class Case {
     }
   }
 
-  public int get_X(){
-    return case_X;
-  }
 
   public int consequences(int a,int b){
     case_Y=a;
@@ -38,9 +35,15 @@ public class Case {
     return 0;
   }
 
+
+  public int get_X(){
+    return case_X;
+  }
+
   public int get_Y(){
     return case_Y;
   }
+
 
   public boolean get_statut(){
     return statut;

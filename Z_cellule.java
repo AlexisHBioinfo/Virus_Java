@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 
 public class Z_cellule extends Cellule {
-  private String immunite = "Destructible";
   Z_cellule(int case_X, int case_Y){
     super(case_X,case_Y,1); //1 ? Mais on sait pas encore comment gérer la vie
   }
@@ -17,10 +16,5 @@ public class Z_cellule extends Cellule {
     System.out.println("Cellule Z killed !");
     statut=false;
     return 1;
-  }
-
-
-  public static String infection(){
-    return "Rien";
   }
 }

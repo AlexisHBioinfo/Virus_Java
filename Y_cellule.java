@@ -4,7 +4,6 @@ import java.util.*;
 public class Y_cellule extends Cellule {
   protected Infectee Y_infectee;
   private int cpt_guerison=0;
-  private String immunite = "Sensible";
   Y_cellule(int case_X, int case_Y){
     super(case_X,case_Y,3);
     Y_infectee = new Infectee(case_X,case_Y);

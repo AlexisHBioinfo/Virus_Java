@@ -52,6 +52,6 @@ abstract public class Organisme extends Case{
 
 
   public int test_case(){
-    return null;
+    return 9;
   }
 }

@@ -73,61 +73,65 @@ public class Virus extends Organisme {
     point_de_vie+=a;
   }
 
+
   public boolean Menu_deplacements(Case[][] grille){
-    if (mouvement){
-      System.out.println("T'es un virus caca ");
-      boolean valide2=false;
-      while (!valide2){
-        System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
-        System.out.println("-> Pour plus de confort, utiliser le pavé numérique.");
-        System.out.println("8. Haut");
-        System.out.println("2. Bas");
-        System.out.println("6. Droite");
-        System.out.println("4. Gauche");
-        int choix = saisie_entier();
-        int check;
-        if (((case_Y-1>=0) || (choix!=8)) && ((case_Y+1<20) || (choix!=2)) && ((case_X-1>=0) || (choix!=4)) && ((case_X+1<20) || (choix!=6))){
-          switch (choix){
-            case 8 :
-            check=grille[case_Y-1][case_X].consequences(case_Y,case_X);
-            set_Y(-1,check,grille);
-            System.out.println("En haut");
-            break;
-            case 2 :
-            check=grille[case_Y+1][case_X].consequences(case_Y,case_X);
-            set_Y(1,check,grille);
-            System.out.println("En bas");
-            break;
-            case 6 :
-            check=grille[case_Y][case_X+1].consequences(case_Y,case_X);
-            set_X(1,check,grille);
-            System.out.println("A droite");
-            break;
-            case 4 :
-            check=grille[case_Y][case_X-1].consequences(case_Y,case_X);
-            set_X(-1,check,grille);
-            System.out.println("A gauche");
-            break;
-            default : System.out.println("Erreur de saisie !");break;
+    System.out.println("Vous avez sélectionné un virus ! Que voulez vous faire ?");
+    System.out.println("Tapez 0 pour déplacer le virus sélectionné.\nTapez 1 pour afficher des informations sur le virus.");
+    int action = saisie_entier();
+    if (action == 0){
+      if (mouvement){
+        boolean valide2=false;
+        while (!valide2){
+          System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
+          System.out.println("-> Pour plus de confort, utiliser le pavé numérique.");
+          System.out.println("8. Haut");
+          System.out.println("2. Bas");
+          System.out.println("6. Droite");
+          System.out.println("4. Gauche");
+          int choix = saisie_entier();
+          int check;
+          if (((case_Y-1>=0) || (choix!=8)) && ((case_Y+1<20) || (choix!=2)) && ((case_X-1>=0) || (choix!=4)) && ((case_X+1<20) || (choix!=6))){
+            switch (choix){
+              case 8 :
+              check=grille[case_Y-1][case_X].consequences(case_Y,case_X);
+              set_Y(-1,check,grille);
+              System.out.println("En haut");
+              break;
+              case 2 :
+              check=grille[case_Y+1][case_X].consequences(case_Y,case_X);
+              set_Y(1,check,grille);
+              System.out.println("En bas");
+              break;
+              case 6 :
+              check=grille[case_Y][case_X+1].consequences(case_Y,case_X);
+              set_X(1,check,grille);
+              System.out.println("A droite");
+              break;
+              case 4 :
+              check=grille[case_Y][case_X-1].consequences(case_Y,case_X);
+              set_X(-1,check,grille);
+              System.out.println("A gauche");
+              break;
+              default : System.out.println("Erreur de saisie !");break;
+            }
+            valide2=true;
           }
-          valide2=true;
+          else {
+            System.out.println("Mouvement hors Elsa SUPER SUPER relou");
+          }
         }
-        else {
-          System.out.println("Mouvement hors Elsa SUPER SUPER relou");
-        }
+        stop_mouvement();
+        return true;
       }
-      stop_mouvement();
-      return true;
+      else {
+        System.out.println("Le virus que vous avez sélectionné a déjà été déplacé !");
+        return false;
+      }
     }
-    else {
-      System.out.println("Le virus que vous avez sélectionné a déjà été déplacé !");
-      return false;
+    else if (action ==1) {
+      System.out.println("Le virus que vous avez sélectionné a "+point_de_vie+" points de vie !");
     }
-  }
-
-
-  public static String infection(){
-    return "Rien";
+    return false;
   }
 
 
@@ -137,12 +141,12 @@ public class Virus extends Organisme {
   }
 
 
-  public void division(){
-    if (point_de_vie == 10){
-      set_pv(-6);
-      
-      Virus virus_div= new Virus(new_X,new_Y);
-      virus_div.set_pv(-1);
-    }
-  }
+  // public void division(){
+  //   if (point_de_vie == 10){
+  //     set_pv(-6);
+  //
+  //     Virus virus_div= new Virus(new_X,new_Y);
+  //     virus_div.set_pv(-1);
+  //   }
+  // }
 }

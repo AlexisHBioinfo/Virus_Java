@@ -19,33 +19,41 @@ public class Jeu {
   public static void main(String[] arg){
     Vector <Case> contenuGrille = new Vector <> ();
     Case[][] grille = creation_grille();
-    Menu(grille,contenuGrille);
+    boolean go = true;
+    while (go){
+      go=Menu(grille,contenuGrille);
+    }
   }
 
 
-  public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
-    System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~");
+  public static boolean Menu(Case[][] grille,Vector <Case> contenuGrille){
+    System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~\n");
     System.out.println("1. Sélection du niveau.");
     System.out.println("2. Lecture des règles.");
+    System.out.println("3. Quitter la simulation.\n");
     int choix = saisie_entier();
+    System.out.println();
     switch (choix){
       case 1 : Menu_niveaux(grille,contenuGrille);
                 break;
       case 2 : Regles();
                 break;
+      case 3 : return false;
       default : System.out.println("Choix non valide");
                 break;
       }
+      return true;
     }
 
 
   public static void Menu_niveaux(Case[][] grille,Vector <Case> contenuGrille){
     boolean run = true;
-    System.out.println("~~~~~~~~~~~ Quel niveau voulez-vous tenter ?~~~~~~~~~~~");
+    System.out.println("~~~~~~~~~~~ Quel niveau voulez-vous tenter ?~~~~~~~~~~~\n");
     System.out.println("1. Facile");
     System.out.println("2. Intermédiaire");
-    System.out.println("3. Difficile");
+    System.out.println("3. Difficile\n");
     int choix = saisie_entier();
+    System.out.println();
     switch (choix){
       case 1 : grille = repartition_organismes(grille,15,30,55,contenuGrille);
                 break;
@@ -56,7 +64,6 @@ public class Jeu {
       default : System.out.println("Choix non valide");
                 break;
     }
-    System.out.println("CPT : "+Cellule.cpt+Virus.cpt);
     boolean tour = true;
     int cpt_tour = 0;
     while (tour){
@@ -75,18 +82,18 @@ public class Jeu {
 
 
   public static Vector <Case> Menu_Virus(Case[][] grille,Vector <Case> contenuGrille){
-    // boolean run = true;
     int mv_virus=0;
     boolean valide;
     int want_X = 0;
     int want_Y = 0;
     while (((want_X !=666) || (want_Y != 666)) && (Virus.cpt!=mv_virus)) {
-      System.out.println("~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~");
+      System.out.println("\n~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~\n");
       System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
       System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
-      System.out.println("Tapez '666' deux fois pour finir votre tour.");
+      System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
       want_X = saisie_entier();
       want_Y = saisie_entier();
+      System.out.println();
       if ((want_X != 666) && (want_Y != 666)){
         if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
           valide=grille[want_Y][want_X].Menu_deplacements(grille);
@@ -104,7 +111,15 @@ public class Jeu {
 
   public static void Regles(){
     System.out.println("~~~~~~~~~~~ Les règles ~~~~~~~~~~~");
-    System.out.println(" A FAIRE ");
+    System.out.println("\nBienvenue dans la simulation HACE Health Advanced Cell Experience\n");
+    System.out.println("Dans cette simulation, le joueur 1 contrôle les virus pendant que le joueur 2 contrôle les cellules.");
+    System.out.println("Elle se déroule en tours de jeu, où le joueur 1 commence et peut déplacer une fois chacun de ses virus de une case.");
+    System.out.println("Son but est d'atteindre les cellules afin de les infecter ! ATTENTION CEPENDANT : certaines cellules sont immunisées.");
+    System.out.println("Le joueur 2, lui, contrôle les cellules. Il peut déplacer que 10 cellules saines par tour !");
+    System.out.println("Son but ? Survivre !");
+    System.out.println("Lorsque le nombre de cellule passe sous la barre des 75 saines, le joueur 1 gagne !");
+    System.out.println("Si il n'y a plus de virus en vie, le joueur 2 remporte la partie !\n");
+    System.out.println("A VOUS DE JOUER !\n");
   }
 
 
@@ -138,8 +153,6 @@ public class Jeu {
     contenuGrille = repartition(indexgrille, 10,4,nbcasesZ,contenuGrille);
     contenuGrille = repartition(indexgrille, 290, 5, 290,contenuGrille);
     grille=association_vecteur_grille(contenuGrille,grille);
-    System.out.println(contenuGrille.get(22));
-    System.out.println(contenuGrille.get(399));
     affichage_grille(grille);
     return grille;
   }
@@ -192,9 +205,6 @@ public class Jeu {
     int y;
     for (int i=0;i<contenuGrille.size();i++){
       Case item = contenuGrille.get(i);
-      item.affiche();
-      // System.out.println(item.get_statut());
-      System.out.println("X: "+item.get_X()+"Y: "+item.get_Y());
       if (item.get_statut()){
         x = item.get_X();
         y = item.get_Y();
