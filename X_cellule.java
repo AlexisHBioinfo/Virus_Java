@@ -10,7 +10,7 @@ public class X_cellule extends Cellule {
     System.out.print("[xx]");
   }
 
-  public int test(int a,int b){
+  public int consequences(int a,int b){
     System.out.println("Victime bolosse !");
     return 3;
     //Pas oublier enlever un pv au virus

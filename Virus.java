@@ -16,10 +16,62 @@ public class Virus extends Organisme {
   }
 
 
-  public int test(int a, int b){
+  public int consequences(int a, int b){
     return 4;
   }
 
+
+  public void set_X(int a,int check, Case [][] grille){
+  switch (check){
+    case 0 : //case vide
+      case_X+=a;
+      break;
+    case 1 : //Z
+      case_X+=a;
+      point_de_vie+=1;
+      break;
+    case 2 : // Y
+      point_de_vie+=1;
+      break;
+    case 3 : // X
+      point_de_vie-=1;
+      break;
+    case 4 : // V
+      break;
+    default :
+      System.out.println("FATAL ERROR");
+      break;
+    }
+  }
+
+
+  public void set_Y(int b, int check, Case [][] grille){
+    switch (check){
+      case 0 : //case vide
+        case_Y+=b;
+        break;
+      case 1 : //Z
+        case_Y+=b;
+        set_pv(1);
+        break;
+      case 2 : // Y
+        set_pv(1);
+        break;
+      case 3 : // X
+        set_pv(-1);
+        break;
+      case 4 : // V
+        break;
+      default :
+        System.out.println("FATAL ERROR");
+        break;
+    }
+  }
+
+
+  public void set_pv(int a){
+    point_de_vie+=a;
+  }
 
   public boolean Menu_deplacements(Case[][] grille){
     if (mouvement){
@@ -37,22 +89,22 @@ public class Virus extends Organisme {
         if (((case_Y-1>=0) || (choix!=8)) && ((case_Y+1<20) || (choix!=2)) && ((case_X-1>=0) || (choix!=4)) && ((case_X+1<20) || (choix!=6))){
           switch (choix){
             case 8 :
-            check=grille[case_Y-1][case_X].test(case_Y,case_X);
+            check=grille[case_Y-1][case_X].consequences(case_Y,case_X);
             set_Y(-1,check,grille);
             System.out.println("En haut");
             break;
             case 2 :
-            check=grille[case_Y+1][case_X].test(case_Y,case_X);
+            check=grille[case_Y+1][case_X].consequences(case_Y,case_X);
             set_Y(1,check,grille);
             System.out.println("En bas");
             break;
             case 6 :
-            check=grille[case_Y][case_X+1].test(case_Y,case_X);
+            check=grille[case_Y][case_X+1].consequences(case_Y,case_X);
             set_X(1,check,grille);
             System.out.println("A droite");
             break;
             case 4 :
-            check=grille[case_Y][case_X-1].test(case_Y,case_X);
+            check=grille[case_Y][case_X-1].consequences(case_Y,case_X);
             set_X(-1,check,grille);
             System.out.println("A gauche");
             break;
@@ -61,10 +113,10 @@ public class Virus extends Organisme {
           valide2=true;
         }
         else {
-          System.out.println("Mouvement hors Elsa SUPER relou");
+          System.out.println("Mouvement hors Elsa SUPER SUPER relou");
         }
       }
-      mouvement=false;
+      stop_mouvement();
       return true;
     }
     else {
@@ -78,4 +130,19 @@ public class Virus extends Organisme {
     return "Rien";
   }
 
+
+  public void maj_compteurs(){
+    super.maj_compteurs();
+    if (point_de_vie==0){statut=false;}
+  }
+
+
+  public void division(){
+    if (point_de_vie == 10){
+      set_pv(-6);
+      
+      Virus virus_div= new Virus(new_X,new_Y);
+      virus_div.set_pv(-1);
+    }
+  }
 }

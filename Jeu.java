@@ -10,6 +10,11 @@ import java.util.Arrays;
 //Fonctions déplacements :
 //Affichage des règles :
 //Revoir enchainement des menus : while au mauvais endroit ?
+//Changement couleur? si déjà déplacé ou par type d'objet.
+//Affichages joueurs : possibilité voir type (yy xx zz) sur la grille ?
+//Selection du virus pour déplacements MAIS AUSSI pour autre chose ? genre check pdv ?
+
+
 public class Jeu {
   public static void main(String[] arg){
     Vector <Case> contenuGrille = new Vector <> ();

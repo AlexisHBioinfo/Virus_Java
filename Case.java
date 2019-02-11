@@ -32,7 +32,7 @@ public class Case {
     return case_X;
   }
 
-  public int test(int a,int b){
+  public int consequences(int a,int b){
     case_Y=a;
     case_X=b;
     return 0;
@@ -47,19 +47,13 @@ public class Case {
   }
 
 
-  public void set_statut(){
-    if (statut){
-      statut=false;
-    }
-    else {
-      statut=true;
-    }
-  }
-
   public void maj_compteurs(){}
 
 
   public Infectee get_infectee(){return null;}
 
 
+  public int test_case(){
+    return 0;
+  }
 }

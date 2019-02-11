@@ -16,7 +16,7 @@ public class Y_cellule extends Cellule {
   }
 
 
-  public int test(int a,int b){
+  public int consequences(int a,int b){
     System.out.println("Vous avez contaminé une cellule sensible. Elle est triste.");
     set_statut();
     Y_infectee.set_statut();

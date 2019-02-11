@@ -14,61 +14,25 @@ abstract public class Organisme extends Case{
       return false;
     }
 
-  public int test(int a,int b){
+
+  public int consequences(int a,int b){
     return 0;
   }
 
 
-  public void set_X(int a,int check, Case [][] grille){
-    switch (check){
-      case 0 : //case vide
-        case_X+=a;
-        break;
-      case 1 : //Z
-        case_X+=a;
-        point_de_vie+=1;
-        break;
-      case 2 : // Y
-        point_de_vie+=1;
-        break;
-      case 3 : // X
-        point_de_vie-=1;
-        break;
-      case 4 : // V
-        break;
-      default :
-        System.out.println("FATAL ERROR");
-        break;
-    }
-  }
+  public void set_X(){return;}
 
 
-  public void set_Y(int b, int check, Case [][] grille){
-    switch (check){
-      case 0 : //case vide
-        case_Y+=b;
-        break;
-      case 1 : //Z
-        case_Y+=b;
-        point_de_vie+=1;
-        break;
-      case 2 : // Y
-        point_de_vie+=1;
-        break;
-      case 3 : // X
-        point_de_vie-=1;
-        break;
-      case 4 : // V
-        break;
-      default :
-        System.out.println("FATAL ERROR");
-        break;
-    }
-  }
+  public void set_Y(){return;}
 
 
   public Infectee get_infectee(){
     return null;
+  }
+
+
+  public void stop_mouvement(){
+    mouvement=false;
   }
 
 
@@ -77,7 +41,17 @@ abstract public class Organisme extends Case{
   }
 
 
+  public void set_statut(){
+    if (statut){
+      statut=false;
+    }
+    else {
+      statut=true;
+    }
+  }
 
 
-
+  public int test_case(){
+    return null;
+  }
 }

@@ -13,7 +13,7 @@ public class Z_cellule extends Cellule {
   }
 
 
-  public int test(int a,int b){
+  public int consequences(int a,int b){
     System.out.println("Cellule Z killed !");
     statut=false;
     return 1;

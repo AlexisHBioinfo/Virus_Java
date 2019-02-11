@@ -11,7 +11,7 @@ abstract public class Cellule extends Organisme {
   }
 
 
-  public int test(int a,int b){
+  public int consequences(int a,int b){
     return 0;
   }
 
@@ -21,9 +21,11 @@ abstract public class Cellule extends Organisme {
   }
 
 
-  public void stop_mouvement(){
-    mouvement=false;
+  public void set_X(){
+
   }
 
-
+  public void set_Y(){
+    
+  }
 }
