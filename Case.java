@@ -56,7 +56,12 @@ public class Case {
   public Infectee get_infectee(){return null;}
 
 
-  public int test_case(){
-    return 0;
+  public boolean test_case(){
+    return true;
+  }
+
+
+  public Vector<Case> division(Vector<Case> contenuGrille, Case[][] grille){
+    return contenuGrille;
   }
 }

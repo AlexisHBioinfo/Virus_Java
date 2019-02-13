@@ -141,12 +141,24 @@ public class Virus extends Organisme {
   }
 
 
-  // public void division(){
-  //   if (point_de_vie == 10){
-  //     set_pv(-6);
-  //
-  //     Virus virus_div= new Virus(new_X,new_Y);
-  //     virus_div.set_pv(-1);
-  //   }
-  // }
+ public Vector<Case> division(Vector<Case> contenuGrille, Case[][] grille){
+    if (point_de_vie == 10){
+      set_pv(-6);
+      for (int i=-1 ; i<=1 ; i++){
+        for (int j=-1; j<=1 ;j++){
+          if ((case_X+i <20) && (case_X+i >=0) && (case_Y+j < 20) && (case_Y+j >= 0)){
+            if (grille[case_X+i][case_Y+j].test_case()){
+              Virus item = new Virus(case_X+i,case_Y+j);
+              item.set_pv(-1);
+              contenuGrille.add(item);
+              System.out.println("Bravo ! Le virus que vous avez déplacé a atteint 10 points de vie et s'est divisé en deux virus ayant chacun 4 points de vie.");
+              System.out.println("Les rangs de votre armée de virus se sont aggrandis !");
+              return contenuGrille;
+            }
+          }
+        }
+      }
+    }
+    return contenuGrille;
+  }
 }

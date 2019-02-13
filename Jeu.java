@@ -98,6 +98,7 @@ public class Jeu {
         if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
           valide=grille[want_Y][want_X].Menu_deplacements(grille);
           if (valide){
+            contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
             mv_virus++;
             grille=association_vecteur_grille(contenuGrille,grille);
             affichage_grille(grille);
@@ -111,13 +112,13 @@ public class Jeu {
 
   public static void Regles(){
     System.out.println("~~~~~~~~~~~ Les règles ~~~~~~~~~~~");
-    System.out.println("\nBienvenue dans la simulation HACE Health Advanced Cell Experience\n");
+    System.out.println("\nBienvenue dans la simulation HACE Harmed Cell\n");
     System.out.println("Dans cette simulation, le joueur 1 contrôle les virus pendant que le joueur 2 contrôle les cellules.");
-    System.out.println("Elle se déroule en tours de jeu, où le joueur 1 commence et peut déplacer une fois chacun de ses virus de une case.");
+    System.out.println("Elle se déroule en tours de jeu. \nLe joueur 1 commence et peut déplacer une fois chacun de ses virus de une case.");
     System.out.println("Son but est d'atteindre les cellules afin de les infecter ! ATTENTION CEPENDANT : certaines cellules sont immunisées.");
-    System.out.println("Le joueur 2, lui, contrôle les cellules. Il peut déplacer que 10 cellules saines par tour !");
-    System.out.println("Son but ? Survivre !");
-    System.out.println("Lorsque le nombre de cellule passe sous la barre des 75 saines, le joueur 1 gagne !");
+    System.out.println("Le joueur 2, lui, contrôle les cellules. Il peut déplacer que 10 cellules saines par tour ! Il dispose de cellules immunisées [xx],\nde cellules sensibles [yy] pouvant être infectées par des virus durant 3 tours et enfin des cellules destructibles [zz] qui meurent instantanément au contact d'un virus.");
+    System.out.println("Son but ? Survivre !\n");
+    System.out.println("Lorsque le nombre de cellules passe sous la barre des 75 saines, le joueur 1 gagne !");
     System.out.println("Si il n'y a plus de virus en vie, le joueur 2 remporte la partie !\n");
     System.out.println("A VOUS DE JOUER !\n");
   }
