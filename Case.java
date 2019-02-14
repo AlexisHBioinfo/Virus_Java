@@ -12,7 +12,7 @@ public class Case {
   public void affiche(){
     System.out.print("[  ]");
   }
-  public boolean Menu_deplacements(Case[][] grille){
+  public boolean Menu_deplacements(Case[][] grille, boolean type){
     System.out.println("Case invalide");
     return false;
   }
@@ -29,7 +29,7 @@ public class Case {
   }
 
 
-  public int consequences(int a,int b){
+  public int consequences(int a,int b, boolean type){
     case_Y=a;
     case_X=b;
     return 0;
@@ -58,6 +58,16 @@ public class Case {
 
   public boolean test_case(){
     return true;
+  }
+
+
+  public void set_statut(){
+    if (statut){
+      statut=false;
+    }
+    else {
+      statut=true;
+    }
   }
 
 

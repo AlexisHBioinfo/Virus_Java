@@ -14,4 +14,24 @@ public class X_cellule extends Cellule {
     return 3;
     //Pas oublier enlever un pv au virus
   }
+
+
+  public void set_X(int a,int check, Case [][] grille){
+    if (check==0){
+      case_X+=a;
+    }
+    else {
+      statut=false;
+    }
+  }
+
+
+  public void set_Y(int b, int check, Case [][] grille){
+    if (check==0){
+      case_Y+=b;
+    }
+    else {
+      statut=false;
+    }
+  }
 }

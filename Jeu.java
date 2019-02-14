@@ -70,7 +70,9 @@ public class Jeu {
       contenuGrille=Menu_Virus(grille,contenuGrille);
       grille=association_vecteur_grille(contenuGrille,grille);
       affichage_grille(grille);
-      // Menu_Cellule(grille,contenuGrille);
+      contenuGrille=Menu_Cellule(grille,contenuGrille);
+      grille=association_vecteur_grille(contenuGrille,grille);
+      affichage_grille(grille);
       for (int i=0;i<contenuGrille.size();i++){
         Case item = contenuGrille.get(i);
         item.maj_compteurs();
@@ -96,7 +98,7 @@ public class Jeu {
       System.out.println();
       if ((want_X != 666) && (want_Y != 666)){
         if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
-          valide=grille[want_Y][want_X].Menu_deplacements(grille);
+          valide=grille[want_Y][want_X].Menu_deplacements(grille, false);
           if (valide){
             contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
             mv_virus++;
@@ -109,6 +111,32 @@ public class Jeu {
     return contenuGrille;
   }
 
+  public static Vector <Case> Menu_Cellule(Case[][] grille,Vector <Case> contenuGrille){
+    int mv_cellule=0;
+    boolean valide;
+    int want_X = 0;
+    int want_Y = 0;
+    while (((want_X !=666) || (want_Y != 666)) && (10!=mv_cellule)) {
+      System.out.println("\n~~~~~~~~~~~ Quelle cellule voulez-vous déplacer (1 déplacement maximum par cellule par tour) ?~~~~~~~~~~~\n");
+      System.out.println("Vous pouvez bouger jusqu'à 10 cellules que vous le souhaitez !");
+      System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
+      System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
+      want_X = saisie_entier();
+      want_Y = saisie_entier();
+      System.out.println();
+      if ((want_X != 666) && (want_Y != 666)){
+        if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
+          valide=grille[want_Y][want_X].Menu_deplacements(grille,true);
+          if (valide){
+            mv_cellule++;
+            grille=association_vecteur_grille(contenuGrille,grille);
+            affichage_grille(grille);
+          }
+        }
+      }
+    }
+    return contenuGrille;
+  }
 
   public static void Regles(){
     System.out.println("~~~~~~~~~~~ Les règles ~~~~~~~~~~~");

@@ -41,4 +41,31 @@ public class Y_cellule extends Cellule {
     }
     super.maj_compteurs();
   }
+
+  public void set_X(int a,int check, Case [][] grille){
+    if (check==0){
+      case_X+=a;
+    }
+    else if (check==3){
+      grille[case_Y][case_X+a].set_statut();
+      case_X+=a;
+    }
+    else {
+      statut=false;
+    }
+  }
+
+
+  public void set_Y(int b, int check, Case [][] grille){
+    if (check==0){
+      case_Y+=b;
+    }
+    else if (check==3){
+      grille[case_Y+b][case_X].set_statut();
+      case_Y+=b;
+    }
+    else {
+      statut=false;
+    }
+  }
 }

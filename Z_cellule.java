@@ -17,4 +17,28 @@ public class Z_cellule extends Cellule {
     statut=false;
     return 1;
   }
+
+
+  public void set_X(int a,int check, Case [][] grille){
+    super.set_X(a,check,grille);
+    if (check==0){
+      case_X+=a;
+    }
+    else if (check!=4){
+      grille[case_Y][case_X+a].set_statut();
+      case_X+=a;
+    }
+  }
+
+
+  public void set_Y(int b, int check, Case [][] grille){
+    super.set_Y(b,check,grille);
+    if (check==0){
+      case_Y+=b;
+    }
+    else if (check!=4){
+      grille[case_Y+b][case_X].set_statut();
+      case_Y+=b;
+    }
+  }
 }
