@@ -12,8 +12,14 @@ public class Z_cellule extends Cellule {
   }
 
 
-  public int consequences(int a,int b){
-    System.out.println("Cellule Z killed !");
+  public int consequences(int a,int b, boolean type){
+    System.out.println("Vous avez atteint une cellule Z !");
+    if (type){
+      System.out.println("Vous fusionnez avec elle.");
+    }
+    else{
+      System.out.println("Vous l'avez contaminée, elle est morte instantanément. Votre virus gagne 1 point de vie.");
+    }
     statut=false;
     return 1;
   }

@@ -6,6 +6,7 @@ public class Infectee extends Virus {
   Infectee(int case_X, int case_Y){
     super(case_X,case_Y);
     statut=false;
+    cpt--;
   }
 
 
@@ -19,6 +20,7 @@ public class Infectee extends Virus {
       cpt_infection-=1;
       if (cpt_infection==0){
         set_statut();
+        cpt--;
         cpt_infection=3;
       }
     }

@@ -48,7 +48,7 @@ abstract public class Organisme extends Case{
           valide2=true;
         }
         else {
-          System.out.println("Mouvement hors Elsa SUPER SUPER relou");
+          System.out.println("Mouvement hors limite ?");
         }
       }
       stop_mouvement();
@@ -82,12 +82,18 @@ abstract public class Organisme extends Case{
   }
 
 
+  public void set_statut(){
+    super.set_statut();
+  }
+
+
+
   public void maj_compteurs(){
     mouvement=true;
   }
 
 
-  public boolean test_case(){
-    return false;
+  public int test_case(){
+    return 99;
   }
 }

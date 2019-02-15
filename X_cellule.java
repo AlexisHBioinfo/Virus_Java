@@ -9,10 +9,11 @@ public class X_cellule extends Cellule {
     System.out.print("[xx]");
   }
 
-  public int consequences(int a,int b){
-    System.out.println("Victime bolosse !");
+  public int consequences(int a,int b, boolean type){
+    System.out.println("Vous avez atteint une cellule résistante X !");
+    if (type){System.out.println("Vous fusionnez avec elle !");}
+    else {System.out.println("Vous ne pouvez pas l'infecter et vous perdez alors 1 point de vie.");}
     return 3;
-    //Pas oublier enlever un pv au virus
   }
 
 

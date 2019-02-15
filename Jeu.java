@@ -67,9 +67,11 @@ public class Jeu {
     boolean tour = true;
     int cpt_tour = 0;
     while (tour){
+      System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
       contenuGrille=Menu_Virus(grille,contenuGrille);
       grille=association_vecteur_grille(contenuGrille,grille);
       affichage_grille(grille);
+      System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
       contenuGrille=Menu_Cellule(grille,contenuGrille);
       grille=association_vecteur_grille(contenuGrille,grille);
       affichage_grille(grille);
@@ -89,10 +91,12 @@ public class Jeu {
     int want_X = 0;
     int want_Y = 0;
     while (((want_X !=666) || (want_Y != 666)) && (Virus.cpt!=mv_virus)) {
+      System.out.println("\n                                  >> JOUEUR VIRUS <<            \n");
       System.out.println("\n~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~\n");
       System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
       System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
       System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
+      System.out.println("\n\nVous pouvez bouger encore "+(Virus.cpt-mv_virus)+" virus.");
       want_X = saisie_entier();
       want_Y = saisie_entier();
       System.out.println();
@@ -117,10 +121,12 @@ public class Jeu {
     int want_X = 0;
     int want_Y = 0;
     while (((want_X !=666) || (want_Y != 666)) && (10!=mv_cellule)) {
+      System.out.println("\n                                  >> JOUEUR CELLULE <<            \n");
       System.out.println("\n~~~~~~~~~~~ Quelle cellule voulez-vous déplacer (1 déplacement maximum par cellule par tour) ?~~~~~~~~~~~\n");
       System.out.println("Vous pouvez bouger jusqu'à 10 cellules que vous le souhaitez !");
       System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
       System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
+      System.out.println("\n\nVous pouvez bouger encore "+(10-mv_cellule)+" cellule(s).");
       want_X = saisie_entier();
       want_Y = saisie_entier();
       System.out.println();

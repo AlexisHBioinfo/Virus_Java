@@ -56,8 +56,8 @@ public class Case {
   public Infectee get_infectee(){return null;}
 
 
-  public boolean test_case(){
-    return true;
+  public int test_case(){
+    return 0;
   }
 
 
