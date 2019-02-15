@@ -20,26 +20,25 @@ public class Y_cellule extends Cellule {
   }
 
 
-  public int consequences(int a,int b, boolean type, String joueur){
+  public int consequences(int a,int b, boolean type, String joueur, String type_cell){
     if (joueur.equals("joueur")){
       System.out.println("Vous avez atteint une cellule sensible Y.");
       if(type){
         System.out.println("Vous fusionnez avec elle.");
+        if (type_cell.equals("Z")){
+          set_statut();
+        }
       }
       else {
         System.out.println("Vous la contaminée et elle se comporte alors comme un virus pendant 3 tours. JACKPOT !");
+        set_statut();
+        Y_infectee.set_statut();
+        Y_infectee.cpt++;
+        Y_infectee.set_position(case_X,case_Y);
       }
-      set_statut();
-      Y_infectee.set_statut();
-      Y_infectee.cpt++;
-      Y_infectee.set_position(case_X,case_Y);
       return 2;
     }
     else {
-      set_statut();
-      Y_infectee.set_statut();
-      Y_infectee.cpt++;
-      Y_infectee.set_position(case_X,case_Y);
       return 2;
     }
   }
@@ -63,30 +62,30 @@ public class Y_cellule extends Cellule {
     super.maj_compteurs();
   }
 
+
+  public String test_type(){
+    return "Y";
+  }
+
+
   public void set_X(int a,int check, Case [][] grille){
-    if (check==0){
+    super.set_X(a,check,grille);
+    if ((check==0) || (check==3)){
       case_X+=a;
     }
-    else if (check==3){
-      grille[case_Y][case_X+a].set_statut();
-      case_X+=a;
-    }
-    else {
-      statut=false;
+    else if ((check==1) || (check==2)){
+      set_statut();
     }
   }
 
 
   public void set_Y(int b, int check, Case [][] grille){
-    if (check==0){
+    super.set_Y(b,check,grille);
+    if ((check==0) || (check==3)){
       case_Y+=b;
     }
-    else if (check==3){
-      grille[case_Y+b][case_X].set_statut();
-      case_Y+=b;
-    }
-    else {
-      statut=false;
+    else if ((check==1) || (check==2)){
+      set_statut();
     }
   }
 }

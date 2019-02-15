@@ -40,7 +40,7 @@ public class Case {
   }
 
 
-  public int consequences(int a,int b, boolean type, String joueur){
+  public int consequences(int a,int b, boolean type, String joueur, String type_cell){
     case_Y=a;
     case_X=b;
     return 0;

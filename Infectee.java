@@ -11,7 +11,12 @@ public class Infectee extends Virus {
 
 
   public void affiche(String type){
-    System.out.print("[#y]");
+    if (mouvement){
+      System.out.print("[\033[32;1;2m#y\033[0m]");
+    }
+    else {
+      System.out.print("[\033[31;1m#y\033[0m]");
+    }
   }
 
 
@@ -24,7 +29,7 @@ public class Infectee extends Virus {
         cpt_infection=3;
       }
     }
-    super.maj_compteurs();
+    mouvement=true;
   }
 
 

@@ -21,7 +21,7 @@ public class Virus extends Organisme {
   }
 
 
-  public int consequences(int a, int b,boolean type, String joueur){
+  public int consequences(int a, int b,boolean type, String joueur, String type_cell){
     return 4;
   }
 
@@ -125,6 +125,11 @@ public class Virus extends Organisme {
       }
     }
     return contenuGrille;
+  }
+
+
+  public String test_type(){
+    return "Virus";
   }
 
 

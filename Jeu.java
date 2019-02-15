@@ -4,6 +4,7 @@ import java.util.Vector;
 import java.util.Random;
 import java.lang.*;
 import java.util.Arrays;
+// package com.journaldev.threads;
 
 
 // A FAIRE :
@@ -74,6 +75,7 @@ public class Jeu {
       else {
         contenuGrille=Menu_Virus(grille,contenuGrille);
         System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
+        grille=association_vecteur_grille(contenuGrille,grille);
         if(config==0){
           contenuGrille=Menu_Cellule_ordi(grille,contenuGrille);
         }
@@ -102,7 +104,7 @@ public class Jeu {
     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     System.out.println("\n                                  >> JOUEUR VIRUS <<            \n");
     System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.\n\n");
-    affichage_grille(grille, "Virus");
+    affichage_grille(grille, "Cellule");
     int mv_virus=0;
     boolean valide;
     int want_X = 0;
@@ -124,7 +126,7 @@ public class Jeu {
             contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
             mv_virus++;
             grille=association_vecteur_grille(contenuGrille,grille);
-            affichage_grille(grille, "Virus");
+            affichage_grille(grille, "Cellule");
           }
         }
       }
@@ -178,6 +180,12 @@ public class Jeu {
       int indice_Y = rand.nextInt(20);
       valide=grille[indice_X][indice_Y].Menu_deplacements_ordi(grille,true);
       if (valide){
+        try {
+          Thread.sleep(500);
+        }
+        catch (InterruptedException e){
+        }
+        System.out.println("\n                                       ...             \n");
         mv_cellule++;
         grille=association_vecteur_grille(contenuGrille,grille);
       }

@@ -10,6 +10,7 @@ abstract public class Organisme extends Case{
 
 
   public boolean Menu_deplacements(Case[][] grille, boolean type){
+    String type_cell=test_type();
     if (mouvement){
       boolean valide2=false;
       while (!valide2){
@@ -24,22 +25,22 @@ abstract public class Organisme extends Case{
         if (((case_Y-1>=0) || (choix!=8)) && ((case_Y+1<20) || (choix!=2)) && ((case_X-1>=0) || (choix!=4)) && ((case_X+1<20) || (choix!=6))){
           switch (choix){
             case 8 :
-            check=grille[case_Y-1][case_X].consequences(case_Y,case_X,type,"joueur");
+            check=grille[case_Y-1][case_X].consequences(case_Y,case_X,type,"joueur",type_cell);
             set_Y(-1,check,grille);
             System.out.println("En haut");
             break;
             case 2 :
-            check=grille[case_Y+1][case_X].consequences(case_Y,case_X,type,"joueur");
+            check=grille[case_Y+1][case_X].consequences(case_Y,case_X,type,"joueur",type_cell);
             set_Y(1,check,grille);
             System.out.println("En bas");
             break;
             case 6 :
-            check=grille[case_Y][case_X+1].consequences(case_Y,case_X,type,"joueur");
+            check=grille[case_Y][case_X+1].consequences(case_Y,case_X,type,"joueur",type_cell);
             set_X(1,check,grille);
             System.out.println("A droite");
             break;
             case 4 :
-            check=grille[case_Y][case_X-1].consequences(case_Y,case_X,type,"joueur");
+            check=grille[case_Y][case_X-1].consequences(case_Y,case_X,type,"joueur",type_cell);
             set_X(-1,check,grille);
             System.out.println("A gauche");
             break;
@@ -61,7 +62,7 @@ abstract public class Organisme extends Case{
   }
 
 
-  public int consequences(int a,int b,boolean type, String joueur){
+  public int consequences(int a,int b,boolean type, String joueur, String type_cell){
     return 0;
   }
 
@@ -90,6 +91,11 @@ abstract public class Organisme extends Case{
 
   public void maj_compteurs(){
     mouvement=true;
+  }
+
+
+  public String test_type(){
+    return "Organisme";
   }
 
 
