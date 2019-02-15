@@ -10,7 +10,7 @@ public class Infectee extends Virus {
   }
 
 
-  public void affiche(){
+  public void affiche(String type){
     System.out.print("[#y]");
   }
 

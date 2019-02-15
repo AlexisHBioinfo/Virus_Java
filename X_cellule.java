@@ -5,8 +5,13 @@ public class X_cellule extends Cellule {
   X_cellule(int case_X, int case_Y){
     super(case_X,case_Y,1000); //cellule immunisée donc vie "infinie"
   }
-  public void affiche(){
-    System.out.print("[xx]");
+  public void affiche(String type){
+    if (type.equals("Cellule")){
+      System.out.print("[xx]");
+    }
+    else {
+      super.affiche(type);
+    }
   }
 
   public int consequences(int a,int b, boolean type){

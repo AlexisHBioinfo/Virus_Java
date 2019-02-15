@@ -10,8 +10,13 @@ public class Y_cellule extends Cellule {
   }
 
 
-  public void affiche(){
-    System.out.print("[yy]");
+  public void affiche(String type){
+    if (type.equals("Cellule")){
+      System.out.print("[yy]");
+    }
+    else {
+      super.affiche(type);
+    }
   }
 
 

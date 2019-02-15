@@ -9,13 +9,24 @@ public class Case {
     case_X = X;
     case_Y = Y;
   }
-  public void affiche(){
+
+
+  public void affiche(String type){
     System.out.print("[  ]");
   }
+
+
   public boolean Menu_deplacements(Case[][] grille, boolean type){
     System.out.println("Case invalide");
     return false;
   }
+
+
+  public boolean Menu_deplacements_ordi(Case[][] grille, boolean type){
+    return false;
+  }
+
+
   public static int saisie_entier() {
     try {
       BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));

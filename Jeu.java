@@ -19,14 +19,11 @@ public class Jeu {
   public static void main(String[] arg){
     Vector <Case> contenuGrille = new Vector <> ();
     Case[][] grille = creation_grille();
-    boolean go = true;
-    while (go){
-      go=Menu(grille,contenuGrille);
-    }
+    Menu(grille,contenuGrille);
   }
 
 
-  public static boolean Menu(Case[][] grille,Vector <Case> contenuGrille){
+  public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
     System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~\n");
     System.out.println("1. Sélection du niveau.");
     System.out.println("2. Lecture des règles.");
@@ -38,16 +35,14 @@ public class Jeu {
                 break;
       case 2 : Regles();
                 break;
-      case 3 : return false;
+      case 3 : break;
       default : System.out.println("Choix non valide");
                 break;
       }
-      return true;
     }
 
 
   public static void Menu_niveaux(Case[][] grille,Vector <Case> contenuGrille){
-    boolean run = true;
     System.out.println("~~~~~~~~~~~ Quel niveau voulez-vous tenter ?~~~~~~~~~~~\n");
     System.out.println("1. Facile");
     System.out.println("2. Intermédiaire");
@@ -64,28 +59,43 @@ public class Jeu {
       default : System.out.println("Choix non valide");
                 break;
     }
+    affichage_grille(grille, "Virus");
     boolean tour = true;
     int cpt_tour = 0;
-    while (tour){
-      System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
-      contenuGrille=Menu_Virus(grille,contenuGrille);
-      grille=association_vecteur_grille(contenuGrille,grille);
-      affichage_grille(grille);
-      System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
-      contenuGrille=Menu_Cellule(grille,contenuGrille);
-      grille=association_vecteur_grille(contenuGrille,grille);
-      affichage_grille(grille);
-      for (int i=0;i<contenuGrille.size();i++){
-        Case item = contenuGrille.get(i);
-        item.maj_compteurs();
+    while ((tour) && (Virus.cpt<Cellule.cpt)){
+      System.out.println("\n\nVoulez vous quitter ? Si oui entrez 0, si non, entrez un autre nombre\n");
+      int choix_exit=saisie_entier();
+      System.out.println();
+      if (choix_exit==0){
+        tour = false;
       }
-      cpt_tour++;
-      System.out.println("Fin du tour "+cpt_tour);
+      else {
+        contenuGrille=Menu_Virus(grille,contenuGrille);
+        System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
+        contenuGrille=Menu_Cellule(grille,contenuGrille);
+        for (int i=0;i<contenuGrille.size();i++){
+          Case item = contenuGrille.get(i);
+          item.maj_compteurs();
+        }
+        cpt_tour++;
+        System.out.println("Fin du tour "+cpt_tour);
+      }
+    }
+    System.out.println("Fin de la partie !");
+    if (Virus.cpt>Cellule.cpt){
+      System.out.println("Le joueur Virus a gagné !");
+    }
+    else {
+      System.out.println("Le joueur Cellule a gagné");
     }
   }
 
 
   public static Vector <Case> Menu_Virus(Case[][] grille,Vector <Case> contenuGrille){
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    System.out.println("\n                                  >> JOUEUR VIRUS <<            \n");
+    System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.\n\n");
+    affichage_grille(grille, "Virus");
     int mv_virus=0;
     boolean valide;
     int want_X = 0;
@@ -96,7 +106,7 @@ public class Jeu {
       System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
       System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
       System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
-      System.out.println("\n\nVous pouvez bouger encore "+(Virus.cpt-mv_virus)+" virus.");
+      System.out.println("\n\nVous pouvez bouger encore "+(Virus.cpt-mv_virus)+" virus.\n");
       want_X = saisie_entier();
       want_Y = saisie_entier();
       System.out.println();
@@ -107,7 +117,7 @@ public class Jeu {
             contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
             mv_virus++;
             grille=association_vecteur_grille(contenuGrille,grille);
-            affichage_grille(grille);
+            affichage_grille(grille, "Virus");
           }
         }
       }
@@ -116,6 +126,10 @@ public class Jeu {
   }
 
   public static Vector <Case> Menu_Cellule(Case[][] grille,Vector <Case> contenuGrille){
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    System.out.println("\n                                  >> JOUEUR CELLULE <<            \n");
+    System.out.println("\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.\n\n");
+    affichage_grille(grille,"Cellule");
     int mv_cellule=0;
     boolean valide;
     int want_X = 0;
@@ -126,7 +140,7 @@ public class Jeu {
       System.out.println("Vous pouvez bouger jusqu'à 10 cellules que vous le souhaitez !");
       System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
       System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
-      System.out.println("\n\nVous pouvez bouger encore "+(10-mv_cellule)+" cellule(s).");
+      System.out.println("\n\nVous pouvez bouger encore "+(10-mv_cellule)+" cellule(s).\n");
       want_X = saisie_entier();
       want_Y = saisie_entier();
       System.out.println();
@@ -136,13 +150,32 @@ public class Jeu {
           if (valide){
             mv_cellule++;
             grille=association_vecteur_grille(contenuGrille,grille);
-            affichage_grille(grille);
+            affichage_grille(grille, "Cellule");
           }
         }
       }
     }
     return contenuGrille;
   }
+
+
+  public static Vector <Case> Menu_Cellule_ordi(Case[][] grille, Vector <Case> contenuGrille){
+    System.out.println("L'ordinateur");
+    int mv_cellule=0;
+    while (mv_cellule<=10){
+      Random rand = new Random();
+      int indice_X = rand.nextInt(20);
+      int indice_Y = rand.nextInt(20);
+      valide=grille[indice_X][indice_Y].Menu_deplacements(grille,true);
+      if (valide){
+        mv_cellule++;
+        grille=association_vecteur_grille(contenuGrille,grille);
+        affichage_grille(grille, "Cellule");
+      }
+    }
+  }
+
+
 
   public static void Regles(){
     System.out.println("~~~~~~~~~~~ Les règles ~~~~~~~~~~~");
@@ -188,7 +221,6 @@ public class Jeu {
     contenuGrille = repartition(indexgrille, 10,4,nbcasesZ,contenuGrille);
     contenuGrille = repartition(indexgrille, 290, 5, 290,contenuGrille);
     grille=association_vecteur_grille(contenuGrille,grille);
-    affichage_grille(grille);
     return grille;
   }
 
@@ -250,7 +282,7 @@ public class Jeu {
   }
 
 
-  public static void affichage_grille(Case[][] grille){
+  public static void affichage_grille(Case[][] grille, String type){
     try {
       for (int horizontal = 0 ; horizontal < 20 ; horizontal++){
         if (horizontal == 0) {System.out.print("     0"+horizontal+" ");}
@@ -262,7 +294,7 @@ public class Jeu {
         if (i <= 9){ System.out.print("0"+i+"  ");}
         else {System.out.print(i+"  ");}
         for (int j=0 ; j < grille[i].length ; j++){
-          grille[i][j].affiche();
+          grille[i][j].affiche(type);
         }
         System.out.println("");
       }
@@ -271,6 +303,9 @@ public class Jeu {
       System.out.println("Création de la grille réussie.");
     }
   }
+
+
+
 
 
   public static int saisie_entier() {

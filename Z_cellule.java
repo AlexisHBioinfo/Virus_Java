@@ -3,12 +3,17 @@ import java.util.*;
 
 public class Z_cellule extends Cellule {
   Z_cellule(int case_X, int case_Y){
-    super(case_X,case_Y,1); //1 ? Mais on sait pas encore comment gérer la vie
+    super(case_X,case_Y,1);
   }
 
 
-  public void affiche(){
-    System.out.print("[zz]");
+  public void affiche(String type){
+    if (type.equals("Cellule")){
+      System.out.print("[zz]");
+    }
+    else {
+      super.affiche(type);
+    }
   }
 
 

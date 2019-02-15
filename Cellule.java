@@ -31,6 +31,12 @@ abstract public class Cellule extends Organisme {
   }
 
 
+  public boolean Menu_deplacements_ordi(Case[][] grille, boolean type){
+    
+  }
+
+
+
   public void set_X(int a, int check, Case [][] grille){
     if (check==4){
       System.out.println("Mais non ! Vous allez vers un virus ! Pour votre propre sécurité, nous n'avons pas validé votre déplacement. \nMAIS votre cellule est quand même tétanisée et doit attendre la fin du tour pour se remettre de ses émotions !");
@@ -54,6 +60,11 @@ abstract public class Cellule extends Organisme {
       statut=true;
       cpt++;
     }
+  }
+
+
+  public void affiche(String type){
+    System.out.print("[cc]");
   }
 
 
