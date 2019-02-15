@@ -12,11 +12,16 @@ public class Virus extends Organisme {
 
 
   public void affiche(String type){
-    System.out.print("[##]");
+    if (mouvement){
+      System.out.print("[\033[32;1;2m##\033[0m]");
+    }
+    else {
+      System.out.print("[\033[31;1m##\033[0m]");
+    }
   }
 
 
-  public int consequences(int a, int b,boolean type){
+  public int consequences(int a, int b,boolean type, String joueur){
     return 4;
   }
 

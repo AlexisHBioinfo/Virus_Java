@@ -20,19 +20,28 @@ public class Y_cellule extends Cellule {
   }
 
 
-  public int consequences(int a,int b, boolean type){
-    System.out.println("Vous avez atteint une cellule sensible Y.");
-    if(type){
-      System.out.println("Vous fusionnez avec elle.");
+  public int consequences(int a,int b, boolean type, String joueur){
+    if (joueur.equals("joueur")){
+      System.out.println("Vous avez atteint une cellule sensible Y.");
+      if(type){
+        System.out.println("Vous fusionnez avec elle.");
+      }
+      else {
+        System.out.println("Vous la contaminée et elle se comporte alors comme un virus pendant 3 tours. JACKPOT !");
+      }
+      set_statut();
+      Y_infectee.set_statut();
+      Y_infectee.cpt++;
+      Y_infectee.set_position(case_X,case_Y);
+      return 2;
     }
     else {
-      System.out.println("Vous la contaminée et elle se comporte alors comme un virus pendant 3 tours. JACKPOT !");
+      set_statut();
+      Y_infectee.set_statut();
+      Y_infectee.cpt++;
+      Y_infectee.set_position(case_X,case_Y);
+      return 2;
     }
-    set_statut();
-    Y_infectee.set_statut();
-    Y_infectee.cpt++;
-    Y_infectee.set_position(case_X,case_Y);
-    return 2;
   }
 
 

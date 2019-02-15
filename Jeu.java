@@ -59,6 +59,8 @@ public class Jeu {
       default : System.out.println("Choix non valide");
                 break;
     }
+    System.out.println("Voulez-vous jouer contre l'ordinateur (tapez 0) ou contre un joueur (tapez 1) ?");
+    int config = saisie_entier();
     affichage_grille(grille, "Virus");
     boolean tour = true;
     int cpt_tour = 0;
@@ -72,7 +74,12 @@ public class Jeu {
       else {
         contenuGrille=Menu_Virus(grille,contenuGrille);
         System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.");
-        contenuGrille=Menu_Cellule(grille,contenuGrille);
+        if(config==0){
+          contenuGrille=Menu_Cellule_ordi(grille,contenuGrille);
+        }
+        else {
+          contenuGrille=Menu_Cellule(grille,contenuGrille);
+        }
         for (int i=0;i<contenuGrille.size();i++){
           Case item = contenuGrille.get(i);
           item.maj_compteurs();
@@ -125,6 +132,7 @@ public class Jeu {
     return contenuGrille;
   }
 
+
   public static Vector <Case> Menu_Cellule(Case[][] grille,Vector <Case> contenuGrille){
     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     System.out.println("\n                                  >> JOUEUR CELLULE <<            \n");
@@ -160,21 +168,23 @@ public class Jeu {
 
 
   public static Vector <Case> Menu_Cellule_ordi(Case[][] grille, Vector <Case> contenuGrille){
-    System.out.println("L'ordinateur");
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    System.out.println("\n                                  >> ORDINATEUR <<            \n");
     int mv_cellule=0;
+    boolean valide;
     while (mv_cellule<=10){
       Random rand = new Random();
       int indice_X = rand.nextInt(20);
       int indice_Y = rand.nextInt(20);
-      valide=grille[indice_X][indice_Y].Menu_deplacements(grille,true);
+      valide=grille[indice_X][indice_Y].Menu_deplacements_ordi(grille,true);
       if (valide){
         mv_cellule++;
         grille=association_vecteur_grille(contenuGrille,grille);
-        affichage_grille(grille, "Cellule");
       }
     }
+    affichage_grille(grille, "Virus");
+    return contenuGrille;
   }
-
 
 
   public static void Regles(){

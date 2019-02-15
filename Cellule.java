@@ -8,7 +8,7 @@ abstract public class Cellule extends Organisme {
   }
 
 
-  public int consequences(int a,int b, boolean type){
+  public int consequences(int a,int b, boolean type,String joueur){
     return 0;
   }
 
@@ -32,7 +32,41 @@ abstract public class Cellule extends Organisme {
 
 
   public boolean Menu_deplacements_ordi(Case[][] grille, boolean type){
-    
+    if (mouvement){
+      boolean valide2=false;
+      Random rand = new Random();
+      while (!valide2){
+        int choix=rand.nextInt(4);
+        int check;
+        if (((case_Y-1>=0) || (choix!=0)) && ((case_Y+1<20) || (choix!=1)) && ((case_X-1>=0) || (choix!=3)) && ((case_X+1<20) || (choix!=2))){
+          switch (choix){
+            case 0 : // Haut
+            check=grille[case_Y-1][case_X].consequences(case_Y,case_X,type,"ordinateur");
+            set_Y(-1,check,grille);
+            break;
+            case 1 : // Bas
+            check=grille[case_Y+1][case_X].consequences(case_Y,case_X,type,"ordinateur");
+            set_Y(1,check,grille);
+            break;
+            case 2 : // Droite
+            check=grille[case_Y][case_X+1].consequences(case_Y,case_X,type,"ordinateur");
+            set_X(1,check,grille);
+            break;
+            case 3 : // Gauche
+            check=grille[case_Y][case_X-1].consequences(case_Y,case_X,type,"ordinateur");
+            set_X(-1,check,grille);
+            break;
+            default : break;
+          }
+          valide2=true;
+        }
+      }
+      stop_mouvement();
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 
