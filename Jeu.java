@@ -8,12 +8,7 @@ import java.util.Arrays;
 
 
 // A FAIRE :
-//Fonctions déplacements :
-//Affichage des règles :
 //Revoir enchainement des menus : while au mauvais endroit ?
-//Changement couleur? si déjà déplacé ou par type d'objet.
-//Affichages joueurs : possibilité voir type (yy xx zz) sur la grille ?
-//Selection du virus pour déplacements MAIS AUSSI pour autre chose ? genre check pdv ?
 
 
 public class Jeu {
@@ -26,7 +21,8 @@ public class Jeu {
 
   public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
     int choix;
-    while (true){
+    boolean run = true;
+    while (run){
       try {
         System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~\n");
         System.out.println("1. Sélection du niveau.");
@@ -40,12 +36,19 @@ public class Jeu {
       }
       System.out.println();
       switch (choix){
-        case 1 : Menu_niveaux(grille,contenuGrille);
-        break;
-        case 2 : Regles();
-        break;
-        case 3 : break;
-        default : System.out.println("Choix non valide");break;
+        case 1 :
+          Menu_niveaux(grille,contenuGrille);
+          run = false;
+          break;
+        case 2 :
+          Regles();
+          break;
+        case 3 :
+          run = false;
+          break;
+        default :
+          System.out.println("Choix non valide");
+          break;
       }
     }
   }
@@ -56,28 +59,61 @@ public class Jeu {
     System.out.println("1. Facile");
     System.out.println("2. Intermédiaire");
     System.out.println("3. Difficile\n");
-
-    int choix = saisie_entier();
-    System.out.println();
-    switch (choix){
-      case 1 : grille = repartition_organismes(grille,15,30,55,contenuGrille);
-                break;
-      case 2 : grille = repartition_organismes(grille,20,40,40,contenuGrille);
-                break;
-      case 3 : grille = repartition_organismes(grille,25,50,25,contenuGrille);
-                break;
-      default : System.out.println("Choix non valide");
-                break;
+    int choix;
+    boolean go = true;
+    int config;
+    while (go){
+      try {
+        choix = saisie_entier();
+        System.out.println();
+      }
+      catch (NumberFormatException e){
+        System.out.println("Veuillez saisir un entier !");
+        choix=5;
+      }
+      switch (choix){
+        case 1 :
+          grille = repartition_organismes(grille,15,30,55,contenuGrille);
+          go = false;
+          break;
+        case 2 :
+          grille = repartition_organismes(grille,20,40,40,contenuGrille);
+          go = false;
+          break;
+        case 3 :
+          grille = repartition_organismes(grille,25,50,25,contenuGrille);
+          go = false;
+          break;
+        default :
+          System.out.println("Choix non valide");
+          break;
+      }
     }
-    System.out.println("Voulez-vous jouer contre l'ordinateur (tapez 0) ou contre un joueur (tapez 1) ?");
-    int config = saisie_entier();
+    config=5;
+    do {
+      try {
+        System.out.println("Voulez-vous jouer contre l'ordinateur (tapez 0) ou contre un joueur (tapez 1) ?");
+        config = saisie_entier();
+        go = false;
+      }
+      catch (NumberFormatException e){
+        System.out.println("Veuillez saisir un entier !");
+        config=5;
+      }
+    } while ((config!=0) && (config!=1));
     affichage_grille(grille, "Virus");
     boolean tour = true;
     int cpt_tour = 0;
     while ((tour) && (Virus.cpt<Cellule.cpt)){
-      System.out.println("\n\nVoulez vous quitter ? Si oui entrez 0, si non, entrez un autre nombre\n");
-      int choix_exit=saisie_entier();
+      System.out.println("\n\nVoulez vous quitter ? Si oui entrez 0, si non, appuyez juste sur entrée !\n");
       System.out.println();
+      int choix_exit;
+      try {
+        choix_exit=saisie_entier();
+      }
+      catch (NumberFormatException e){
+        choix_exit=5;
+      }
       if (choix_exit==0){
         tour = false;
       }
@@ -118,25 +154,35 @@ public class Jeu {
     boolean valide;
     int want_X = 0;
     int want_Y = 0;
-    while (((want_X !=666) || (want_Y != 666)) && (Virus.cpt!=mv_virus)) {
-      System.out.println("\n                                  >> JOUEUR VIRUS <<            \n");
-      System.out.println("\n~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~\n");
-      System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
-      System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
-      System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
-      System.out.println("\n\nVous pouvez bouger encore "+(Virus.cpt-mv_virus)+" virus.\n");
-      want_X = saisie_entier();
-      want_Y = saisie_entier();
-      System.out.println();
-      if ((want_X != 666) && (want_Y != 666)){
-        if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
-          valide=grille[want_Y][want_X].Menu_deplacements(grille, false);
-          if (valide){
-            contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
-            mv_virus++;
-            grille=association_vecteur_grille(contenuGrille,grille);
-            affichage_grille(grille, "Virus");
+    boolean bad_input=true;
+    while (((want_X !=42) || (want_Y != 42)) && (Virus.cpt!=mv_virus)) {
+      bad_input=true;
+      while (bad_input){
+        try {
+          System.out.println("\n                                  >> JOUEUR VIRUS <<            \n");
+          System.out.println("\n~~~~~~~~~~~ Quel virus voulez-vous déplacer (1 déplacement maximum par virus par tour) ?~~~~~~~~~~~\n");
+          System.out.println("Vous pouvez bouger autant de virus que vous le souhaitez !");
+          System.out.println("Rentrez le numéro de la colonne voulue faites ENTREE puis rentrez les numéro de la ligne.");
+          System.out.println("Tapez '42' deux fois pour finir votre tour.\n");
+          System.out.println("\n\nVous pouvez bouger encore "+(Virus.cpt-mv_virus)+" virus.\n");
+          want_X = saisie_entier();
+          want_Y = saisie_entier();
+          System.out.println();
+          bad_input=false;
+          if ((want_X != 42) && (want_Y != 42)){
+            if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
+              valide=grille[want_Y][want_X].Menu_deplacements(grille, false);
+              if (valide){
+                contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
+                mv_virus++;
+                grille=association_vecteur_grille(contenuGrille,grille);
+                affichage_grille(grille, "Virus");
+              }
+            }
           }
+        }
+        catch (NumberFormatException e){
+          System.out.println("Veuillez saisir des entiers !");
         }
       }
     }
@@ -153,24 +199,34 @@ public class Jeu {
     boolean valide;
     int want_X = 0;
     int want_Y = 0;
-    while (((want_X !=666) || (want_Y != 666)) && (10!=mv_cellule)) {
-      System.out.println("\n                                  >> JOUEUR CELLULE <<            \n");
-      System.out.println("\n~~~~~~~~~~~ Quelle cellule voulez-vous déplacer (1 déplacement maximum par cellule par tour) ?~~~~~~~~~~~\n");
-      System.out.println("Vous pouvez bouger jusqu'à 10 cellules que vous le souhaitez !");
-      System.out.println("Rentrez le numéro de la colonne voulue faites ENTRER puis rentrez les numéro de la ligne.");
-      System.out.println("Tapez '666' deux fois pour finir votre tour.\n");
-      System.out.println("\n\nVous pouvez bouger encore "+(10-mv_cellule)+" cellule(s).\n");
-      want_X = saisie_entier();
-      want_Y = saisie_entier();
-      System.out.println();
-      if ((want_X != 666) && (want_Y != 666)){
-        if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
-          valide=grille[want_Y][want_X].Menu_deplacements(grille,true);
-          if (valide){
-            mv_cellule++;
-            grille=association_vecteur_grille(contenuGrille,grille);
-            affichage_grille(grille, "Cellule");
+    boolean bad_input=true;
+    while (((want_X !=42) || (want_Y != 42)) && (10!=mv_cellule)) {
+      bad_input=true;
+      while (bad_input){
+        try {
+          System.out.println("\n                                  >> JOUEUR CELLULE <<            \n");
+          System.out.println("\n~~~~~~~~~~~ Quelle cellule voulez-vous déplacer (1 déplacement maximum par cellule par tour) ?~~~~~~~~~~~\n");
+          System.out.println("Vous pouvez bouger jusqu'à 10 cellules que vous le souhaitez !");
+          System.out.println("Rentrez le numéro de la colonne voulue faites ENTREE puis rentrez les numéro de la ligne.");
+          System.out.println("Tapez '42' deux fois pour finir votre tour.\n");
+          System.out.println("\n\nVous pouvez bouger encore "+(10-mv_cellule)+" cellule(s).\n");
+          want_X = saisie_entier();
+          want_Y = saisie_entier();
+          System.out.println();
+          bad_input=false;
+          if ((want_X != 42) && (want_Y != 42)){
+            if (want_X < 20 && want_Y < 20 && want_X >= 0 && want_Y >= 0){
+              valide=grille[want_Y][want_X].Menu_deplacements(grille,true);
+              if (valide){
+                mv_cellule++;
+                grille=association_vecteur_grille(contenuGrille,grille);
+                affichage_grille(grille, "Cellule");
+              }
+            }
           }
+        }
+        catch (NumberFormatException e){
+          System.out.println("Veuillez saisir des entiers !");
         }
       }
     }
@@ -179,7 +235,7 @@ public class Jeu {
 
 
   public static Vector <Case> Menu_Cellule_ordi(Case[][] grille, Vector <Case> contenuGrille){
-    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     System.out.println("\n                                  >> ORDINATEUR <<            \n");
     int mv_cellule=0;
     boolean valide;
@@ -330,9 +386,6 @@ public class Jeu {
       System.out.println("Création de la grille réussie.");
     }
   }
-
-
-
 
 
   public static int saisie_entier() {
