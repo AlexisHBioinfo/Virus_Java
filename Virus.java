@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Virus extends Organisme {
   protected int point_de_vie;
-  protected int numero;
   protected static int cpt=0;
   Virus(int case_X, int case_Y, int hp){
     super(case_X,case_Y);
