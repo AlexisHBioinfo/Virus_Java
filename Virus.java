@@ -2,10 +2,12 @@ import java.io.*;
 import java.util.*;
 
 public class Virus extends Organisme {
+  protected int point_de_vie;
   protected int numero;
   protected static int cpt=0;
-  Virus(int case_X, int case_Y){
-    super(case_X,case_Y,5);
+  Virus(int case_X, int case_Y, int hp){
+    super(case_X,case_Y);
+    point_de_vie = hp;
     numero = cpt;
     cpt ++;
   }
@@ -107,7 +109,7 @@ public class Virus extends Organisme {
 
   public void maj_compteurs(){
     super.maj_compteurs();
-    if (point_de_vie==0){statut=false;}
+    if (point_de_vie<1){statut=false;System.out.println("lalala");}
   }
 
 
@@ -118,8 +120,7 @@ public class Virus extends Organisme {
         for (int j=-1; j<=1 ;j++){
           if ((case_X+i <20) && (case_X+i >=0) && (case_Y+j < 20) && (case_Y+j >= 0)){
             if (grille[case_X+i][case_Y+j].test_case()==0){
-              Virus item = new Virus(case_X+i,case_Y+j);
-              item.set_pv(-1);
+              Virus item = new Virus(case_X+i,case_Y+j,4);
               contenuGrille.add(item);
               System.out.println("Bravo ! Le virus que vous avez déplacé a atteint 10 points de vie et s'est divisé en deux virus ayant chacun 4 points de vie.");
               System.out.println("Les rangs de votre armée de virus se sont aggrandis !");

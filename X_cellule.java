@@ -3,7 +3,7 @@ import java.util.*;
 
 public class X_cellule extends Cellule {
   X_cellule(int case_X, int case_Y){
-    super(case_X,case_Y,1000); //cellule immunisée donc vie "infinie"
+    super(case_X,case_Y);
   }
   public void affiche(String type){
     if (type.equals("Virus")){

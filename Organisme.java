@@ -1,11 +1,9 @@
 import java.io.*;
 import java.util.*;
 abstract public class Organisme extends Case{
-  protected int point_de_vie;
   protected boolean mouvement=true;
-  public Organisme (int case_X, int case_Y, int hp){
+  public Organisme (int case_X, int case_Y){
     super(case_X,case_Y);
-    point_de_vie=hp;
   }
 
 

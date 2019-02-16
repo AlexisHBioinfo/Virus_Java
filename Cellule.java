@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.*;
 abstract public class Cellule extends Organisme {
   protected static int cpt =0;
-  public Cellule (int case_X, int case_Y, int hp){
-    super(case_X,case_Y,hp);
+  public Cellule (int case_X, int case_Y){
+    super(case_X,case_Y);
     cpt++;
   }
 

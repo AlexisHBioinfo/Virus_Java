@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Infectee extends Virus {
   protected int cpt_infection=3;
-  Infectee(int case_X, int case_Y){
-    super(case_X,case_Y);
+  Infectee(int case_X, int case_Y, int hp){
+    super(case_X,case_Y, hp);
     statut=false;
     cpt--;
   }

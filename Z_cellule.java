@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Z_cellule extends Cellule {
   Z_cellule(int case_X, int case_Y){
-    super(case_X,case_Y,1);
+    super(case_X,case_Y);
   }
 
 

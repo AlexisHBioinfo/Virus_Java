@@ -5,8 +5,8 @@ public class Y_cellule extends Cellule {
   protected Infectee Y_infectee;
   private int cpt_guerison=0;
   Y_cellule(int case_X, int case_Y){
-    super(case_X,case_Y,3);
-    Y_infectee = new Infectee(case_X,case_Y);
+    super(case_X,case_Y);
+    Y_infectee = new Infectee(case_X,case_Y,5);
   }
 
 
@@ -35,7 +35,7 @@ public class Y_cellule extends Cellule {
         }
       }
       else {
-        System.out.println("Vous la contaminée et elle se comporte alors comme un virus pendant 3 tours. JACKPOT !");
+        System.out.println("Vous la contaminez et elle se comporte alors comme un virus pendant 3 tours. JACKPOT !");
         set_statut();
         Y_infectee.set_statut();
         Y_infectee.cpt++;

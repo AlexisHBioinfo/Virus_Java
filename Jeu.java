@@ -131,6 +131,7 @@ public class Jeu {
           Case item = contenuGrille.get(i);
           item.maj_compteurs();
         }
+        grille=association_vecteur_grille(contenuGrille,grille);
         cpt_tour++;
         System.out.println("Fin du tour "+cpt_tour);
       }
@@ -255,7 +256,6 @@ public class Jeu {
         grille=association_vecteur_grille(contenuGrille,grille);
       }
     }
-    // affichage_grille(grille, "Virus");
     return contenuGrille;
   }
 
@@ -333,7 +333,7 @@ public class Jeu {
             contenuGrille.add(item);
             break;
         case 4 :
-            item = new Virus(pos_X,pos_Y);
+            item = new Virus(pos_X,pos_Y,5);
             contenuGrille.add(item);
             break;
         case 5 :
