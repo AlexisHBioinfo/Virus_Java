@@ -56,6 +56,7 @@ public class Jeu {
     System.out.println("1. Facile");
     System.out.println("2. Intermédiaire");
     System.out.println("3. Difficile\n");
+
     int choix = saisie_entier();
     System.out.println();
     switch (choix){
