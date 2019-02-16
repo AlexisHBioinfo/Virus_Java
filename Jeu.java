@@ -25,22 +25,30 @@ public class Jeu {
 
 
   public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
-    System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~\n");
-    System.out.println("1. Sélection du niveau.");
-    System.out.println("2. Lecture des règles.");
-    System.out.println("3. Quitter la simulation.\n");
-    int choix = saisie_entier();
-    System.out.println();
-    switch (choix){
-      case 1 : Menu_niveaux(grille,contenuGrille);
-                break;
-      case 2 : Regles();
-                break;
-      case 3 : break;
-      default : System.out.println("Choix non valide");
-                break;
+    int choix;
+    while (true){
+      try {
+        System.out.println("~~~~~~~~~~~ Que voulez-vous faire ?~~~~~~~~~~~\n");
+        System.out.println("1. Sélection du niveau.");
+        System.out.println("2. Lecture des règles.");
+        System.out.println("3. Quitter la simulation.\n");
+        choix = saisie_entier();
+      }
+      catch (NumberFormatException e){
+        System.out.println("Veuillez saisir un entier !");
+        choix = 5;
+      }
+      System.out.println();
+      switch (choix){
+        case 1 : Menu_niveaux(grille,contenuGrille);
+        break;
+        case 2 : Regles();
+        break;
+        case 3 : break;
+        default : System.out.println("Choix non valide");break;
       }
     }
+  }
 
 
   public static void Menu_niveaux(Case[][] grille,Vector <Case> contenuGrille){
@@ -104,7 +112,7 @@ public class Jeu {
     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     System.out.println("\n                                  >> JOUEUR VIRUS <<            \n");
     System.out.println("\n\nIl reste encore "+Cellule.cpt+" cellules et "+Virus.cpt+" virus en jeu.\n\n");
-    affichage_grille(grille, "Cellule");
+    affichage_grille(grille, "Virus");
     int mv_virus=0;
     boolean valide;
     int want_X = 0;
@@ -126,7 +134,7 @@ public class Jeu {
             contenuGrille=grille[want_Y][want_X].division(contenuGrille, grille);
             mv_virus++;
             grille=association_vecteur_grille(contenuGrille,grille);
-            affichage_grille(grille, "Cellule");
+            affichage_grille(grille, "Virus");
           }
         }
       }
@@ -190,7 +198,7 @@ public class Jeu {
         grille=association_vecteur_grille(contenuGrille,grille);
       }
     }
-    affichage_grille(grille, "Virus");
+    // affichage_grille(grille, "Virus");
     return contenuGrille;
   }
 

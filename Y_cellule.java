@@ -11,11 +11,16 @@ public class Y_cellule extends Cellule {
 
 
   public void affiche(String type){
-    if (type.equals("Cellule")){
-      System.out.print("[yy]");
+    if (type.equals("Virus")){
+      System.out.print("[cc]");
     }
     else {
-      super.affiche(type);
+      if (mouvement){
+        System.out.print("[\033[0;96myy\033[0m]");//cyan
+      }
+      else {
+        System.out.print("[\033[38;2;255;70;0myy\033[0m]");//rouge orangé non bold
+      }
     }
   }
 

@@ -8,11 +8,16 @@ public class Z_cellule extends Cellule {
 
 
   public void affiche(String type){
-    if (type.equals("Cellule")){
-      System.out.print("[zz]");
+    if (type.equals("Virus")){
+      System.out.print("[cc]");
     }
     else {
-      super.affiche(type);
+      if (mouvement){
+        System.out.print("[\033[0;94mzz\033[0m]");//bleu gris
+      }
+      else {
+        System.out.print("[\033[38;2;255;70;0mzz\033[0m]");//rouge orangé non bold
+      }
     }
   }
 

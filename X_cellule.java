@@ -6,11 +6,16 @@ public class X_cellule extends Cellule {
     super(case_X,case_Y,1000); //cellule immunisée donc vie "infinie"
   }
   public void affiche(String type){
-    if (type.equals("Cellule")){
-      System.out.print("[xx]");
+    if (type.equals("Virus")){
+      System.out.print("[cc]");
     }
     else {
-      super.affiche(type);
+      if (mouvement){
+        System.out.print("[\033[38;2;0;135;175mxx\033[0m]");//vert bleu
+      }
+      else {
+        System.out.print("[\033[38;2;255;70;0mxx\033[0m]");//rouge orangé non bold
+      }
     }
   }
 

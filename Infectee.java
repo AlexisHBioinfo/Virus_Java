@@ -11,14 +11,18 @@ public class Infectee extends Virus {
 
 
   public void affiche(String type){
-    if (mouvement){
-      System.out.print("[\033[32;1;2m#y\033[0m]");
+    if(type.equals("Virus")){
+      if (mouvement){
+        System.out.print("[\033[38;2;50;200;0m#y\033[0m]");//vert
+      }
+      else {
+        System.out.print("[\033[38;2;255;70;0m#y\033[0m]");//rouge orangé non bold
+      }
     }
-    else {
-      System.out.print("[\033[31;1m#y\033[0m]");
+    else{
+      System.out.print("[#y]");
     }
   }
-
 
   public void maj_compteurs(){
     if (statut){
