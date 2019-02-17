@@ -7,7 +7,6 @@ public class Virus extends Organisme {
   Virus(int case_X, int case_Y, int hp){
     super(case_X,case_Y);
     point_de_vie = hp;
-    numero = cpt;
     cpt ++;
   }
 
