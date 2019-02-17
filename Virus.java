@@ -11,24 +11,33 @@ public class Virus extends Organisme {
   }
 
 
+////////////////////    METHODE D'AFFICHAGE DU VIRUS  //////////////////////////////
+
+
   public void affiche(String type){
     if (type.equals("Cellule")){
       System.out.print("[##]");
     }
     else {
       if (mouvement){
-        System.out.print("[\033[38;2;50;200;0m##\033[0m]");//vert
+        System.out.print("[\033[38;2;50;200;0m##\033[0m]");//ANSI Escape Code vert
       }
       else {
-        System.out.print("[\033[38;2;255;70;0m##\033[0m]");//rouge orangé non bold
+        System.out.print("[\033[38;2;255;70;0m##\033[0m]");//ANSI Escape Code rouge orangé
       }
     }
   }
 
 
+////////////   METHODE APPLIQUEE PAR UNE CELLULE OU UN VIRUS A UNE CASE VIDE  ///////////////
+
+
   public int consequences(int a, int b,boolean type, String joueur, String type_cell){
     return 4;
   }
+
+
+/////////////// METHODES RENVOYEES PAR L'OBJET D'ARRIVE A L'OBJET EN DEPLACEMENT  ///////////////
 
 
   public void set_X(int a,int check, Case [][] grille){
@@ -79,10 +88,15 @@ public class Virus extends Organisme {
   }
 
 
+//////// METHODE PERMETTANT DE MODIFIER LES POINTS DE VIE DE L'OBJET  ///////////////
+
+
   public void set_pv(int a){
     point_de_vie+=a;
   }
 
+
+///////////////// MENU DEPLACEMENT SPECIFIQUE AUX VIRUS   ///////////////////////////
 
   public boolean Menu_deplacements(Case[][] grille, boolean type){
     if (type){
@@ -105,10 +119,16 @@ public class Virus extends Organisme {
   }
 
 
+///////////////////////////////    METHODE METTANT A JOUR LES ATTRIBUTS DE L'OBJET A CHAQUE TOUR   ////////////////
+
+
   public void maj_compteurs(){
     super.maj_compteurs();
     if (point_de_vie<1){statut=false;System.out.println("lalala");}
   }
+
+
+/////////////////////////////   PERMET AUX VIRUS DE SE DIVISER S'ILS ATTEIGNENT 10 POINTS DE VIE   ////////////////
 
 
  public Vector<Case> division(Vector<Case> contenuGrille, Case[][] grille){
@@ -132,9 +152,15 @@ public class Virus extends Organisme {
   }
 
 
+////////////////////////////////   RENVOIT LA CLASSE DE L'OBJET ////////////////////////
+
+
   public String test_type(){
     return "Virus";
   }
+
+
+////////////////////////////////   PERMET DE VERIFIER SI L'OBJET ET VIDE    ////////////////
 
 
   public int test_case(){

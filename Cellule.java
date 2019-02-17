@@ -8,15 +8,15 @@ abstract public class Cellule extends Organisme {
   }
 
 
-  public int consequences(int a,int b, boolean type,String joueur, String type_cell){
-    return 0;
+  //////////////////    AFFICHAGE DE CELLULE (JOUEUR VIRUS)     ////////////////////////////
+
+
+  public void affiche(String type){
+    System.out.print("[cc]");
   }
 
 
-  public Infectee get_infectee(){
-    return null;
-  }
-
+///////////////////////      MENUS SPECIFIQUE AUX CELLULES     ////////////////////////////////
 
   public boolean Menu_deplacements(Case[][] grille,boolean type){
     if (type){
@@ -79,6 +79,8 @@ abstract public class Cellule extends Organisme {
   }
 
 
+/////////////// METHODES RENVOYEES PAR L'OBJET D'ARRIVE A L'OBJET EN DEPLACEMENT  ///////////////
+
 
   public void set_X(int a, int check, Case [][] grille){
     if (check==4){
@@ -94,6 +96,9 @@ abstract public class Cellule extends Organisme {
   }
 
 
+////////////////////////////////   MODIFIE L'ATTRIBUT STATUT     ////////////////////
+
+
   public void set_statut(){
     if (statut){
       statut=false;
@@ -106,9 +111,7 @@ abstract public class Cellule extends Organisme {
   }
 
 
-  public void affiche(String type){
-    System.out.print("[cc]");
-  }
+////////////////////////////////   PERMET DE VERIFIER SI L'OBJET ET VIDE    ////////////////
 
 
   public int test_case(){

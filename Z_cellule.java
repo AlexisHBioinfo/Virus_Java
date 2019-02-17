@@ -7,19 +7,25 @@ public class Z_cellule extends Cellule {
   }
 
 
+////////////////////    METHODE D'AFFICHAGE DE LA CELLULE Z  //////////////////////////////
+
+
   public void affiche(String type){
     if (type.equals("Virus")){
       System.out.print("[cc]");
     }
     else {
       if (mouvement){
-        System.out.print("[\033[0;94mzz\033[0m]");//bleu gris
+        System.out.print("[\033[0;94mzz\033[0m]");//ANSI Escape Code bleu gris
       }
       else {
-        System.out.print("[\033[38;2;255;70;0mzz\033[0m]");//rouge orangé non bold
+        System.out.print("[\033[38;2;255;70;0mzz\033[0m]");//ANSI Escape Code rouge orangé
       }
     }
   }
+
+
+////////////   METHODE APPLIQUEE PAR UNE CELLULE OU UN VIRUS A UNE CASE VIDE  ///////////////
 
 
   public int consequences(int a,int b, boolean type, String joueur, String type_cell){
@@ -43,6 +49,9 @@ public class Z_cellule extends Cellule {
   public String test_type(){
     return "Z";
   }
+
+
+/////////////// METHODES RENVOYEES PAR L'OBJET D'ARRIVE A L'OBJET EN DEPLACEMENT  ///////////////
 
 
   public void set_X(int a,int check, Case [][] grille){

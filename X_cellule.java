@@ -5,19 +5,28 @@ public class X_cellule extends Cellule {
   X_cellule(int case_X, int case_Y){
     super(case_X,case_Y);
   }
+
+
+////////////////////    METHODE D'AFFICHAGE DE LA CELLULE X  //////////////////////////////
+
+
   public void affiche(String type){
     if (type.equals("Virus")){
       System.out.print("[cc]");
     }
     else {
       if (mouvement){
-        System.out.print("[\033[38;2;0;135;175mxx\033[0m]");//vert bleu
+        System.out.print("[\033[38;2;0;135;175mxx\033[0m]");//ANSI Escape Code vert bleu
       }
       else {
-        System.out.print("[\033[38;2;255;70;0mxx\033[0m]");//rouge orangé non bold
+        System.out.print("[\033[38;2;255;70;0mxx\033[0m]");//ANSI Escape Code rouge orangé
       }
     }
   }
+
+
+////////////   METHODE APPLIQUEE PAR UNE CELLULE OU UN VIRUS A UNE CASE VIDE  ///////////////
+
 
   public int consequences(int a,int b, boolean type, String joueur, String type_cell){
     if (joueur.equals("joueur")){
@@ -37,9 +46,15 @@ public class X_cellule extends Cellule {
   }
 
 
+////////////////////////////////   RENVOIT LA CLASSE DE L'OBJET ////////////////////////
+
+
   public String test_type(){
     return "X";
   }
+
+
+/////////////// METHODES RENVOYEES PAR L'OBJET D'ARRIVE A L'OBJET EN DEPLACEMENT  ///////////////
 
 
   public void set_X(int a,int check, Case [][] grille){

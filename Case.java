@@ -11,9 +11,15 @@ public class Case {
   }
 
 
+//////////////////    AFFICHAGE DE CASE VIDE     ////////////////////////////
+
+
   public void affiche(String type){
     System.out.print("[  ]");
   }
+
+
+//////////////////     MENU DE DEPLACEMENT POUR UNE CASE VIDE    /////////////
 
 
   public boolean Menu_deplacements(Case[][] grille, boolean type){
@@ -22,9 +28,15 @@ public class Case {
   }
 
 
+///////////////   MENU DE DEPLACEMENT POUR UNE CASE VIDE COTE ORDINATEUR ///////////
+
+
   public boolean Menu_deplacements_ordi(Case[][] grille, boolean type){
     return false;
   }
+
+
+  /////////////////////////////       ENTREE STANDARD D'ENTIER         ///////////////////////
 
 
   public static int saisie_entier() {
@@ -40,6 +52,9 @@ public class Case {
   }
 
 
+////////////   METHODE APPLIQUEE PAR UNE CELLULE OU UN VIRUS A UNE CASE VIDE  ///////////////
+
+
   public int consequences(int a,int b, boolean type, String joueur, String type_cell){
     case_Y=a;
     case_X=b;
@@ -47,13 +62,23 @@ public class Case {
   }
 
 
+///////////////////////    RENVOIT L'ATTRIBUT CASE_X DE L'OBJET     /////////////////////
+
+
   public int get_X(){
     return case_X;
   }
 
+
+///////////////////////    RENVOIT L'ATTRIBUT CASE_Y DE L'OBJET     /////////////////////
+
+
   public int get_Y(){
     return case_Y;
   }
+
+
+///////////////////////    RENVOIT L'ATTRIBUT STATUT DE L'OBJET     /////////////////////
 
 
   public boolean get_statut(){
@@ -61,15 +86,21 @@ public class Case {
   }
 
 
+///////////////////////      METHODE APPLICANT LA NOTION DE TEMPS AUX OBJETS  //////////////////
+
+
   public void maj_compteurs(){}
 
 
-  public Infectee get_infectee(){return null;}
+////    METHODE PERMETTANT A L'OBJET DE DONNER SON IDENTITE AFIN D'APPLIQUER UNE CONSEQUENCE SPECIFIQUE    ////////
 
 
   public int test_case(){
     return 0;
   }
+
+
+////////////////////////      INTERVERTIT LE STATUT DE L'OBJET : MORT / VIVANT  //////////////////////////
 
 
   public void set_statut(){

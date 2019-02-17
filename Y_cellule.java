@@ -10,19 +10,25 @@ public class Y_cellule extends Cellule {
   }
 
 
+////////////////////    METHODE D'AFFICHAGE DE LA CELLULE Y  //////////////////////////////
+
+
   public void affiche(String type){
     if (type.equals("Virus")){
       System.out.print("[cc]");
     }
     else {
       if (mouvement){
-        System.out.print("[\033[0;96myy\033[0m]");//cyan
+        System.out.print("[\033[0;96myy\033[0m]");//ANSI Escape Code cyan
       }
       else {
-        System.out.print("[\033[38;2;255;70;0myy\033[0m]");//rouge orangé non bold
+        System.out.print("[\033[38;2;255;70;0myy\033[0m]");//ANSI Escape Code rouge orangé non bold
       }
     }
   }
+
+
+////////////   METHODE APPLIQUEE PAR UNE CELLULE OU UN VIRUS A UNE CASE VIDE  ///////////////
 
 
   public int consequences(int a,int b, boolean type, String joueur, String type_cell){
@@ -49,9 +55,15 @@ public class Y_cellule extends Cellule {
   }
 
 
+////////////////////////////////// METHODE RENVOYANT L'OBJET INFECTEE LIE A LA CELLULE Y ///////////////////////
+
+
   public Infectee get_infectee(){
     return Y_infectee;
   }
+
+
+///////////////////////////////    METHODE METTANT A JOUR LES ATTRIBUTS DE L'OBJET A CHAQUE TOUR   ////////////////
 
 
   public void maj_compteurs(){
@@ -68,9 +80,16 @@ public class Y_cellule extends Cellule {
   }
 
 
+////////////////////////////////   RENVOIT LA CLASSE DE L'OBJET ////////////////////////
+
+
   public String test_type(){
     return "Y";
   }
+
+
+
+/////////////// METHODES RENVOYEES PAR L'OBJET D'ARRIVE A L'OBJET EN DEPLACEMENT  ///////////////
 
 
   public void set_X(int a,int check, Case [][] grille){

@@ -7,6 +7,9 @@ abstract public class Organisme extends Case{
   }
 
 
+////////////////////// MENU DEPLACEMENT POUR UN ORGANISME   /////////////////////
+
+
   public boolean Menu_deplacements(Case[][] grille, boolean type){
     String type_cell=test_type();
     if (mouvement){
@@ -23,7 +26,7 @@ abstract public class Organisme extends Case{
         if (((case_Y-1>=0) || (choix!=8)) && ((case_Y+1<20) || (choix!=2)) && ((case_X-1>=0) || (choix!=4)) && ((case_X+1<20) || (choix!=6))){
           switch (choix){
             case 8 :
-            check=grille[case_Y-1][case_X].consequences(case_Y,case_X,type,"joueur",type_cell);
+            check=grille[case_Y-1][case_X].consequences(case_Y,case_X,type,"joueur",type_cell);  ////// APPLICATION DE METHODE A L'OBJET A LA POSITION D'ARRIVEE
             set_Y(-1,check,grille);
             System.out.println("En haut");
             break;
@@ -60,9 +63,7 @@ abstract public class Organisme extends Case{
   }
 
 
-  public int consequences(int a,int b,boolean type, String joueur, String type_cell){
-    return 0;
-  }
+/////////////// METHODES RENVOYEES PAR L'OBJET D'ARRIVE A L'OBJET EN DEPLACEMENT  ///////////////
 
 
   public void set_X(int a, int b, Case[][] grille){return;}
@@ -71,9 +72,7 @@ abstract public class Organisme extends Case{
   public void set_Y(int a, int b, Case[][] grille){return;}
 
 
-  public Infectee get_infectee(){
-    return null;
-  }
+////////////////////////////////   MODIFIE L'ATTRIBUT MOUVEMENT EN FALSE     ////////////////////
 
 
   public void stop_mouvement(){
@@ -81,10 +80,15 @@ abstract public class Organisme extends Case{
   }
 
 
+////////////////////////////////   MODIFIE L'ATTRIBUT STATUT     ////////////////////
+
+
   public void set_statut(){
     super.set_statut();
   }
 
+
+///////////////////////////// REINITIALISE MOUVEMENT ////////////////////:
 
 
   public void maj_compteurs(){
@@ -92,9 +96,15 @@ abstract public class Organisme extends Case{
   }
 
 
+////////////////////////////////   RENVOIT LA CLASSE DE L'OBJET ////////////////////////
+
+
   public String test_type(){
     return "Organisme";
   }
+
+
+////////////////////////////////   PERMET DE VERIFIER SI L'OBJET ET VIDE    ////////////////
 
 
   public int test_case(){

@@ -4,11 +4,6 @@ import java.util.Vector;
 import java.util.Random;
 import java.lang.*;
 import java.util.Arrays;
-// package com.journaldev.threads;
-
-
-// A FAIRE :
-//Revoir enchainement des menus : while au mauvais endroit ?
 
 
 public class Jeu {
@@ -18,7 +13,7 @@ public class Jeu {
     Menu(grille,contenuGrille);
   }
 
-
+///////////////////////////////          MENUS            //////////////////////////////////////////////////////////////////
   public static void Menu(Case[][] grille,Vector <Case> contenuGrille){
     int choix;
     boolean run = true;
@@ -274,6 +269,9 @@ public class Jeu {
   }
 
 
+/////////////////////////////   INITIALISATION DE LA GRILLE    /////////////////////////////////////////////
+
+
   public static Case[][] creation_grille(){
     Case grille[][] = new Case[20][];
     for ( int i=0; i < grille.length ; i++){
@@ -288,6 +286,10 @@ public class Jeu {
   }
 
 
+/////////////////////////         PREMIERE REPARTITION DES OBJETS DANS LA GRILLE         ////////////////////////////////////
+
+
+
   public static Case[][] repartition_organismes(Case[][] grille, int nbX, int nbY, int nbZ,Vector <Case> contenuGrille){
     int nbV = 10;
     Vector <Integer> indexgrille = new Vector<>();
@@ -298,14 +300,17 @@ public class Jeu {
     int nbcasesX = nbcases - nbX;
     int nbcasesY = nbcasesX - nbY;
     int nbcasesZ = nbcasesY - nbZ;
-    contenuGrille = repartition(indexgrille, nbX,1, nbcases,contenuGrille);
-    contenuGrille = repartition(indexgrille, nbY,2, nbcasesX,contenuGrille);
-    contenuGrille = repartition(indexgrille, nbZ,3, nbcasesY,contenuGrille);
-    contenuGrille = repartition(indexgrille, 10,4,nbcasesZ,contenuGrille);
-    contenuGrille = repartition(indexgrille, 290, 5, 290,contenuGrille);
-    grille=association_vecteur_grille(contenuGrille,grille);
+    contenuGrille = repartition(indexgrille, nbX,1, nbcases,contenuGrille);     // CREE UN NOMBRE NBX DE CELLULE X
+    contenuGrille = repartition(indexgrille, nbY,2, nbcasesX,contenuGrille);    // CREE UN NOMBRE NBY DE CELLULE Y
+    contenuGrille = repartition(indexgrille, nbZ,3, nbcasesY,contenuGrille);    // CREE UN NOMBRE NBZ DE CELLULE Z
+    contenuGrille = repartition(indexgrille, 10,4,nbcasesZ,contenuGrille);      // CREE 10 VIRUS
+    contenuGrille = repartition(indexgrille, 290, 5, 290,contenuGrille);        // CREE 290 CASES VIDES
+    grille=association_vecteur_grille(contenuGrille,grille);                    // PLACE LES OBJETS DANS LA GRILLE
     return grille;
   }
+
+
+////////////////////////          CREATION DES OBJETS AVEC COORDONNEES ALEATOIRES              ////////////////////////
 
 
   public static Vector <Case> repartition(Vector <Integer> indexgrille, int nbOrganisme, int quelOrganisme, int nbcases, Vector <Case> contenuGrille){
@@ -316,29 +321,28 @@ public class Jeu {
       indexgrille.remove(indice);
       int pos_X = index_pos%20;
       int pos_Y = index_pos/20;
-      Case item;
       switch (quelOrganisme){
         case 1 :
-            item = new X_cellule(pos_X,pos_Y);
-            contenuGrille.add(item);
+            X_cellule itemX = new X_cellule(pos_X,pos_Y);
+            contenuGrille.add(itemX);
             break;
         case 2 :
-            item = new Y_cellule(pos_X,pos_Y);
-            Infectee item_infectee=item.get_infectee();
-            contenuGrille.add(item);
+            Y_cellule itemY = new Y_cellule(pos_X,pos_Y);
+            Infectee item_infectee=itemY.get_infectee();
+            contenuGrille.add(itemY);
             contenuGrille.add(item_infectee);
             break;
         case 3 :
-            item = new Z_cellule(pos_X,pos_Y);
-            contenuGrille.add(item);
+            Z_cellule itemZ = new Z_cellule(pos_X,pos_Y);
+            contenuGrille.add(itemZ);
             break;
         case 4 :
-            item = new Virus(pos_X,pos_Y,5);
-            contenuGrille.add(item);
+            Virus itemV = new Virus(pos_X,pos_Y,5);
+            contenuGrille.add(itemV);
             break;
         case 5 :
-            item = new Case(pos_X,pos_Y);
-            contenuGrille.add(item);
+            Case itemC = new Case(pos_X,pos_Y);
+            contenuGrille.add(itemC);
             break;
         default :
             System.out.println("Création d'organisme invalide");
@@ -347,6 +351,9 @@ public class Jeu {
     }
     return contenuGrille;
   }
+
+
+////////////////// PARCOURT DU VECTEUR ET REPLACEMENT DES OBJETS DANS LA GRILLE /////////////////
 
 
   public static Case [][] association_vecteur_grille(Vector <Case> contenuGrille,Case [][] grille){
@@ -363,6 +370,9 @@ public class Jeu {
     }
     return grille;
   }
+
+
+//////////////////////////////   AFFICHAGE DE LA GRILLE SUR LE TERMINAL ////////////////////////////
 
 
   public static void affichage_grille(Case[][] grille, String type){
@@ -386,6 +396,9 @@ public class Jeu {
       System.out.println("Création de la grille réussie.");
     }
   }
+
+
+/////////////////////////////       ENTREE STANDARD D'ENTIER         ///////////////////////
 
 
   public static int saisie_entier() {
